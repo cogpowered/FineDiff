@@ -1,0 +1,27 @@
+{
+    "name": "rcrowe/finediff",
+    "description": "PHP implementation of a Fine granularity Diff engine",
+    "homepage": "https://github.com/rcrowe/finediff",
+    "license": "MIT",
+    "keywords": ["text", "diff"],
+    "authors": [
+        {
+            "name": "Raymond Hill"
+        },
+        {
+            "name": "Rob Crowe",
+            "email": "hello@vivalacrowe.com"
+        }
+    ],
+    "type": "library",
+    "require": {
+        "php": ">=5.3.0"
+    },
+    "require-dev": {
+        "mockery/mockery": "*",
+        "phpunit/phpunit": "*"
+    },
+    "autoload": {
+        "psr-0": { "rcrowe\\FineDiff": "src/" }
+    }
+}
