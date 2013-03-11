@@ -34,16 +34,13 @@ class Diff
         // Set some sensible defaults
 
         // Set the granularity of the diff
-        $granularity OR $granularity = new Character;
-        $this->granularity = $granularity;
+        $this->granularity = ($granularity !== null) ? $granularity : new Character;
 
         // Set the renderer to use when calling Diff::render
-        $renderer OR $renderer = new Html;
-        $this->renderer = $renderer;
+        $this->renderer = ($renderer !== null) ? $renderer : new Html;
 
         // Set the diff parser
-        $parser OR $parser = new Parser($granularity);
-        $this->parser = $parser;
+        $this->parser = ($parser !== null) ? $parser : new Parser($this->granularity);
     }
 
     public function getGranularity()
