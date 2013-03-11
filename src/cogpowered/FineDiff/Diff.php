@@ -3,8 +3,8 @@
 namespace cogpowered\FineDiff;
 
 use cogpowered\FineDiff\Granularity\GranularityInterface;
-use cogpowered\FineDiff\Parser\ParserInterface;
 use cogpowered\FineDiff\Render\RendererInterface;
+use cogpowered\FineDiff\Parser\ParserInterface;
 
 /**
 * FineDiff class
