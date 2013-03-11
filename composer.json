@@ -23,5 +23,6 @@
     },
     "autoload": {
         "psr-0": { "rcrowe\\FineDiff": "src/" }
-    }
+    },
+    "minimum-stability": "dev"
 }

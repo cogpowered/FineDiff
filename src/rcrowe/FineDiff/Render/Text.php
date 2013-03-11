@@ -4,10 +4,14 @@ namespace rcrowe\FineDiff\Render;
 
 use rcrowe\FineDiff\Parser\OpcodeInterface;
 
-class Text implements RenderInterface
+class Text extends Renderer
 {
-    public function render(OpcodeInterface $opcode)
+    public function callback($opcode, $from, $from_offset, $from_len)
     {
+        if ($opcode === 'c' || $opcode === 'i') {
+            return substr($from, $from_offset, $from_len);
+        }
 
+        return '';
     }
 }

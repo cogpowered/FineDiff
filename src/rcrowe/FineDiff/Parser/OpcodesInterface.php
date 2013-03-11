@@ -2,7 +2,7 @@
 
 namespace rcrowe\FineDiff\Parser;
 
-interface OpcodeInterface
+interface OpcodesInterface
 {
     public function __construct(array $opcodes);
     public function getOpcodes();

@@ -77,7 +77,7 @@ class Parser implements ParserInterface
         $this->process($from_text, $to_text);
 
         // Return processed diff
-        return new Opcode($this->edits);
+        return new Opcodes($this->edits);
     }
 
     protected function process($from_text, $to_text)

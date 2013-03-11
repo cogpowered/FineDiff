@@ -25,18 +25,24 @@ echo $css;
 
 
 $opcodes = FineDiff::getDiffOpcodes($from_text, $to_text);
-var_dump($opcodes);
+echo $opcodes.' ';
 echo FineDiff::renderDiffToHTMLFromOpcodes($from_text, $opcodes);
 echo '<hr />';
 
 
-$opcode = (new rcrowe\FineDiff\Diff)->getOpcode($from_text, $to_text, new rcrowe\FineDiff\Granularity\Word);
-echo $opcode;
+$opcode = (new rcrowe\FineDiff\Diff)->getOpcodes($from_text, $to_text);
+echo $opcode.' ';
 
-echo (new rcrowe\FineDiff\Render\Html)->render($opcode);
+echo (new rcrowe\FineDiff\Render\Html)->process($from_text, $opcode);
+echo '<hr />';
 
-// echo FineDiff::renderDiffToHTMLFromOpcodes($from_text, $opcodes);
+
+$opcode = (new rcrowe\FineDiff\Diff)->getOpcodes($from_text, $to_text);
+echo $opcode.' ';
+
+echo (new rcrowe\FineDiff\Render\Text)->process($from_text, $opcode);
+echo '<hr />';
 
 
-// $granularity = new rcrowe\FineDiff\Granularity\Word;
-// var_dump($granularity->getDelimiters());
+echo (new rcrowe\FineDiff\Diff)->render($from_text, $to_text);
+

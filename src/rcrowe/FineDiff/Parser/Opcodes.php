@@ -2,7 +2,7 @@
 
 namespace rcrowe\FineDiff\Parser;
 
-class Opcode implements OpcodeInterface
+class Opcodes implements OpcodesInterface
 {
     protected $opcodes = array();
 
