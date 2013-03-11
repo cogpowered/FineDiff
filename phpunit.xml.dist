@@ -9,8 +9,11 @@
     bootstrap="vendor/autoload.php">
 
     <testsuites>
-        <testsuite name="Usage">
-            <directory suffix=".php">tests/Usage</directory>
+        <testsuite name="Granularity">
+            <directory suffix=".php">tests/Granularity</directory>
+        </testsuite>
+        <testsuite name="Delimiters">
+            <directory suffix=".php">tests/Delimiters</directory>
         </testsuite>
     </testsuites>
     <filter>
