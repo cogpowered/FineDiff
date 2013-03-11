@@ -1,5 +1,5 @@
 {
-    "name": "rcrowe/finediff",
+    "name": "cogpowered/finediff",
     "description": "PHP implementation of a Fine granularity Diff engine",
     "homepage": "https://github.com/rcrowe/finediff",
     "license": "MIT",
@@ -10,7 +10,7 @@
         },
         {
             "name": "Rob Crowe",
-            "email": "hello@vivalacrowe.com"
+            "email": "rob@cogpowered.com"
         }
     ],
     "type": "library",
@@ -22,7 +22,7 @@
         "phpunit/phpunit": "*"
     },
     "autoload": {
-        "psr-0": { "rcrowe\\FineDiff": "src/" }
+        "psr-0": { "cogpowered\\FineDiff": "src/" }
     },
     "minimum-stability": "dev"
 }
