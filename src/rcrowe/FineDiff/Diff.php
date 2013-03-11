@@ -8,7 +8,7 @@ use rcrowe\FineDiff\Parser\ParserInterface;
 /**
 * FineDiff class
 */
-class FineDiff
+class Diff
 {
     /**
      * @var rcrowe\FineDiff\Parser\ParserInterface
@@ -33,7 +33,7 @@ class FineDiff
      *
      * @return string
      */
-    public function getDiff($from_text, $to_text)
+    public function getOpcode($from_text, $to_text)
     {
         return $this->parser->parse($from_text, $to_text);
     }

@@ -3,8 +3,6 @@
 include 'src/finediff.php';
 include 'vendor/autoload.php';
 
-// use rcrowe\FineDiff\FineDiff as FineDiff;
-use rcrowe\FineDiff\FineDiff as FineDiffTwo;
 
 $from_text = 'Hello worlds';
 $to_text   = 'Hello2 world';
@@ -25,16 +23,17 @@ ins {
 CSS;
 echo $css;
 
-$opcodes = FineDiff::getDiffOpcodes($from_text, $to_text, new rcrowe\FineDiff\Granularity\Character);
+
+$opcodes = FineDiff::getDiffOpcodes($from_text, $to_text);
 var_dump($opcodes);
 echo FineDiff::renderDiffToHTMLFromOpcodes($from_text, $opcodes);
 echo '<hr />';
 
 
-$opcodes = (new FineDiffTwo)->getDiff($from_text, $to_text);
-echo $opcodes;
+$opcode = (new rcrowe\FineDiff\Diff)->getOpcode($from_text, $to_text, new rcrowe\FineDiff\Granularity\Word);
+echo $opcode;
 
-echo (new rcrowe\FineDiff\Render\Html)->render($opcodes);
+echo (new rcrowe\FineDiff\Render\Html)->render($opcode);
 
 // echo FineDiff::renderDiffToHTMLFromOpcodes($from_text, $opcodes);
 

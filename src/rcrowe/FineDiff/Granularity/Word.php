@@ -4,7 +4,7 @@ namespace rcrowe\FineDiff\Granularity;
 
 use rcrowe\FineDiff\Delimiters;
 
-class Word implements GranularityInterface
+class Word extends Granularity
 {
     protected $delimiters = array(
         Delimiters::PARAGRAPH,
