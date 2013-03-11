@@ -1,7 +1,7 @@
 {
     "name": "cogpowered/finediff",
     "description": "PHP implementation of a Fine granularity Diff engine",
-    "homepage": "https://github.com/rcrowe/finediff",
+    "homepage": "https://github.com/cogpowered/FineDiff",
     "license": "MIT",
     "keywords": ["text", "diff"],
     "authors": [
