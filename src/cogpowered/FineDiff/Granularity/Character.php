@@ -1,8 +1,8 @@
 <?php
 
-namespace rcrowe\FineDiff\Granularity;
+namespace cogpowered\FineDiff\Granularity;
 
-use rcrowe\FineDiff\Delimiters;
+use cogpowered\FineDiff\Delimiters;
 
 class Character extends Granularity
 {

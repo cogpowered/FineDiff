@@ -1,5 +1,5 @@
 <?php
 
-namespace rcrowe\FineDiff\Exceptions;
+namespace cogpowered\FineDiff\Exceptions;
 
 class GranularityCountException extends \Exception {}

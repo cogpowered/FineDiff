@@ -1,6 +1,6 @@
 <?php
 
-namespace rcrowe\FineDiff\Granularity;
+namespace cogpowered\FineDiff\Granularity;
 
 abstract class Granularity implements GranularityInterface, \ArrayAccess, \Countable
 {

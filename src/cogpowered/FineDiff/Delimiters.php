@@ -1,6 +1,6 @@
 <?php
 
-namespace rcrowe\FineDiff;
+namespace cogpowered\FineDiff;
 
 class Delimiters
 {

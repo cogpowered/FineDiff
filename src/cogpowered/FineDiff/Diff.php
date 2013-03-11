@@ -1,10 +1,10 @@
 <?php
 
-namespace rcrowe\FineDiff;
+namespace cogpowered\FineDiff;
 
-use rcrowe\FineDiff\Granularity\GranularityInterface;
-use rcrowe\FineDiff\Parser\ParserInterface;
-use rcrowe\FineDiff\Render\RendererInterface;
+use cogpowered\FineDiff\Granularity\GranularityInterface;
+use cogpowered\FineDiff\Parser\ParserInterface;
+use cogpowered\FineDiff\Render\RendererInterface;
 
 /**
 * FineDiff class
@@ -12,17 +12,17 @@ use rcrowe\FineDiff\Render\RendererInterface;
 class Diff
 {
     /**
-     * @var rcrowe\FineDiff\Granularity\GranularityInterface
+     * @var cogpowered\FineDiff\Granularity\GranularityInterface
      */
     protected $granularity;
 
     /**
-     * @var rcrowe\FineDiff\Render\RendererInterface
+     * @var cogpowered\FineDiff\Render\RendererInterface
      */
     protected $renderer;
 
     /**
-     * @var rcrowe\FineDiff\Parser\ParserInterface
+     * @var cogpowered\FineDiff\Parser\ParserInterface
      */
     protected $parser;
 
