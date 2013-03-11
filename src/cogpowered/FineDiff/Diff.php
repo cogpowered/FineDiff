@@ -26,7 +26,7 @@ use cogpowered\FineDiff\Render\Html;
 use cogpowered\FineDiff\Parser\Parser;
 
 /**
-* FineDiff class
+* Diff class.
 */
 class Diff
 {
@@ -45,6 +45,16 @@ class Diff
      */
     protected $parser;
 
+    /**
+     * Instantiate a new instance of Diff.
+     *
+     * @param cogpowered\FineDiff\Granularity\GranularityInterface $granularity Level of diff.
+     * @param cogpowered\FineDiff\Render\RenderInterface           $renderer    Diff renderer.
+     * @param cogpowered\FineDiff\Parser\ParserInterface           $parser      Parser used to generate opcodes.
+     *
+     * @throws cogpowered\FineDiff\Exceptions\GranularityCountException
+     * @throws cogpowered\FineDiff\Exceptions\OperationException
+     */
     public function __construct(GranularityInterface $granularity = null, RendererInterface $renderer = null, ParserInterface $parser = null)
     {
         // Set some sensible defaults
@@ -59,11 +69,22 @@ class Diff
         $this->parser = ($parser !== null) ? $parser : new Parser($this->granularity);
     }
 
+    /**
+     * Returns the granularity object used by the parser.
+     *
+     * @return @cogpowered\FineDiff\Granularity\GranularityInterface
+     */
     public function getGranularity()
     {
         return $this->parser->getGranularity();
     }
 
+    /**
+     * Set the granularity level of the parser.
+     *
+     * @param cogpowered\FineDiff\Granularity\GranularityInterface
+     * @return void
+     */
     public function setGranularity(GranularityInterface $granularity)
     {
         $this->parser->setGranularity($granularity);
