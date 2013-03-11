@@ -5,6 +5,9 @@ namespace cogpowered\FineDiff;
 use cogpowered\FineDiff\Granularity\GranularityInterface;
 use cogpowered\FineDiff\Render\RendererInterface;
 use cogpowered\FineDiff\Parser\ParserInterface;
+use cogpowered\FineDiff\Granularity\Character;
+use cogpowered\FineDiff\Render\Html;
+use cogpowered\FineDiff\Parser\Parser;
 
 /**
 * FineDiff class
@@ -28,16 +31,48 @@ class Diff
 
     public function __construct(GranularityInterface $granularity = null, RendererInterface $renderer = null, ParserInterface $parser = null)
     {
+        // Set some sensible defaults
+
         // Set the granularity of the diff
-        $granularity OR $granularity = new Granularity\Character;
+        $granularity OR $granularity = new Character;
         $this->granularity = $granularity;
 
         // Set the renderer to use when calling Diff::render
-        $renderer OR $renderer = new Render\Html;
+        $renderer OR $renderer = new Html;
         $this->renderer = $renderer;
 
         // Set the diff parser
-        $parser OR $parser = new Parser\Parser($granularity);
+        $parser OR $parser = new Parser($granularity);
+        $this->parser = $parser;
+    }
+
+    public function getGranularity()
+    {
+        return $this->parser->getGranularity();
+    }
+
+    public function setGranularity(GranularityInterface $granularity)
+    {
+        $this->parser->setGranularity($granularity);
+    }
+
+    public function getRenderer()
+    {
+        return $this->renderer;
+    }
+
+    public function setRenderer(RendererInterface $renderer)
+    {
+        $this->renderer = $renderer;
+    }
+
+    public function getParser()
+    {
+        return $this->parser;
+    }
+
+    public function setParser(ParserInterface $parser)
+    {
         $this->parser = $parser;
     }
 
