@@ -1,8 +1,8 @@
 <?php
 
-namespace rcrowe\FineDiff;
+namespace rcrowe\FineDiff\Parser\Operations;
 
-class FineDiffReplaceOp extends FineDiffOp
+class Replace implements OperationInterface
 {
     public function __construct($fromLen, $text)
     {
@@ -35,7 +35,7 @@ class FineDiffReplaceOp extends FineDiffOp
 
         $to_len = strlen($this->text);
 
-        if ( $to_len === 1 ) {
+        if ($to_len === 1) {
             return "{$del_opcode}i:{$this->text}";
         }
 

@@ -1,8 +1,8 @@
 <?php
 
-namespace rcrowe\FineDiff;
+namespace rcrowe\FineDiff\Parser\Operations;
 
-class FineDiffDeleteOp extends FineDiffOp
+class Delete implements OperationInterface
 {
     public function __construct($len)
     {
@@ -21,7 +21,7 @@ class FineDiffDeleteOp extends FineDiffOp
 
     public function getOpcode()
     {
-        if ( $this->fromLen === 1 ) {
+        if ($this->fromLen === 1) {
             return 'd';
         }
 

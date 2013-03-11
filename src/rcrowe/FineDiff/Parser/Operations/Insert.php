@@ -1,8 +1,8 @@
 <?php
 
-namespace rcrowe\FineDiff;
+namespace rcrowe\FineDiff\Parser\Operations;
 
-class FineDiffInsertOp extends FineDiffOp
+class Insert implements OperationInterface
 {
     public function __construct($text)
     {

@@ -1,8 +1,8 @@
 <?php
 
-namespace rcrowe\FineDiff;
+namespace rcrowe\FineDiff\Parser\Operations;
 
-class FineDiffCopyOp extends FineDiffOp
+class Copy implements OperationInterface
 {
     public function __construct($len)
     {
