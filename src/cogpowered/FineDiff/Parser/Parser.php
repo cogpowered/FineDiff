@@ -68,11 +68,6 @@ class Parser implements ParserInterface
         $this->granularity = $granularity;
     }
 
-    public function getDiffParser()
-    {
-        return $this->diffParser;
-    }
-
     /**
      * @throws rcrowe\FineDiff\Exceptions\GranularityCountException
      */
