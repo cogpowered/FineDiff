@@ -60,10 +60,6 @@ class OpcodesTest extends PHPUnit_Framework_TestCase
 
     public function testToString()
     {
-        ob_start();
-        echo $this->opcodes;
-        $output = ob_get_clean();
-
-        $this->assertEquals($output, $this->opcodes->generate());
+        $this->assertEquals((string)$this->opcodes, $this->opcodes->generate());
     }
 }
