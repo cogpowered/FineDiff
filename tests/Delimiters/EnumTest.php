@@ -1,6 +1,6 @@
 <?php
 
-namespace FineDiffTests;
+namespace FineDiffTests\Delimiters;
 
 use PHPUnit_Framework_TestCase;
 

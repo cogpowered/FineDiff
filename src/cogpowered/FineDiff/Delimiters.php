@@ -18,6 +18,11 @@
 
 namespace cogpowered\FineDiff;
 
+/**
+ * Used by classes implementing cogpowered\FineDiff\Granularity\GranularityInterface.
+ *
+ * Class is used more like an Enum type; the class can not be instantiated.
+ */
 abstract class Delimiters
 {
     const PARAGRAPH = "\n\r";
