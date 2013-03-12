@@ -5,8 +5,14 @@ namespace FineDiffTests\Parser\Operations;
 use PHPUnit_Framework_TestCase;
 use cogpowered\FineDiff\Parser\Operations\Copy;
 
-class OpcodesTest extends PHPUnit_Framework_TestCase
+class CopyTest extends PHPUnit_Framework_TestCase
 {
+    public function testImplementsOperationInterface()
+    {
+        $replace = new Copy(10);
+        $this->assertTrue(is_a($replace, 'cogpowered\FineDiff\Parser\Operations\OperationInterface'));
+    }
+
     public function testGetFromLen()
     {
         $copy = new Copy(10);
