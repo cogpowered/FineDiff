@@ -18,6 +18,9 @@
         <testsuite name="Granularity">
             <directory suffix=".php">tests/Granularity</directory>
         </testsuite>
+        <testsuite name="Parser">
+            <directory suffix=".php">tests/Parser</directory>
+        </testsuite>
         <testsuite name="Render">
             <directory suffix=".php">tests/Render</directory>
         </testsuite>
