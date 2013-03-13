@@ -18,4 +18,7 @@
 
 namespace cogpowered\FineDiff\Exceptions;
 
+/**
+ * Thrown when trying to set an opcode that doesn't implement cogpowered\FineDiff\Parser\Operations\OperationInterface.
+ */
 class OperationException extends \Exception {}

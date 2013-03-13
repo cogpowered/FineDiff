@@ -20,15 +20,27 @@ namespace cogpowered\FineDiff\Parser;
 
 use cogpowered\FineDiff\Exceptions\OperationException;
 
+/**
+ * Holds all the opcodes returned by the parser.
+ */
 class Opcodes implements OpcodesInterface
 {
+    /**
+     * @var array Individual opcodes.
+     */
     protected $opcodes = array();
 
+    /**
+     * @inheritdoc
+     */
     public function getOpcodes()
     {
         return $this->opcodes;
     }
 
+    /**
+     * @inheritdoc
+     */
     public function setOpcodes(array $opcodes)
     {
         $this->opcodes = array();
@@ -44,11 +56,17 @@ class Opcodes implements OpcodesInterface
         }
     }
 
+    /**
+     * @inheritdoc
+     */
     public function generate()
     {
         return implode('', $this->opcodes);
     }
 
+    /**
+     * @inheritdoc
+     */
     public function __toString()
     {
         return $this->generate();

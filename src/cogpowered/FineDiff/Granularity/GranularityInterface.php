@@ -25,6 +25,18 @@ interface GranularityInterface
     public function offsetSet($offset, $value);
     public function offsetUnset($offset);
 
+    /**
+     * Get the delimiters that make up the granularity.
+     *
+     * @return array
+     */
     public function getDelimiters();
+
+    /**
+     * Set the delimiters that make up the granularity.
+     *
+     * @param array $delimiters
+     * @return void
+     */
     public function setDelimiters(array $delimiters);
 }

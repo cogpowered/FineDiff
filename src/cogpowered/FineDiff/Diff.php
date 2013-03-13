@@ -6,8 +6,8 @@
 * Computes a set of instructions to convert the content of
 * one string into another.
 *
-* Originally created by Raymond Hill (github.com/gorhill/PHP-FineDiff), brought up
-* to date by Cog Powered (github.com/cogpowered/FineDiff).
+* Originally created by Raymond Hill (https://github.com/gorhill/PHP-FineDiff), brought up
+* to date by Cog Powered (https://github.com/cogpowered/FineDiff).
 *
 * @copyright Copyright 2011 (c) Raymond Hill (http://raymondhill.net/blog/?p=441)
 * @copyright Copyright 2013 (c) Robert Crowe (http://cogpowered.com)
@@ -82,7 +82,7 @@ class Diff
     /**
      * Set the granularity level of the parser.
      *
-     * @param cogpowered\FineDiff\Granularity\GranularityInterface
+     * @param cogpowered\FineDiff\Granularity\GranularityInterface $granularity
      * @return void
      */
     public function setGranularity(GranularityInterface $granularity)
@@ -90,39 +90,70 @@ class Diff
         $this->parser->setGranularity($granularity);
     }
 
+    /**
+     * Get the render.
+     *
+     * @return cogpowered\FineDiff\Render\RendererInterface
+     */
     public function getRenderer()
     {
         return $this->renderer;
     }
 
+    /**
+     * Set the renderer.
+     *
+     * @param cogpowered\FineDiff\Render\RendererInterface $renderer
+     * @return void
+     */
     public function setRenderer(RendererInterface $renderer)
     {
         $this->renderer = $renderer;
     }
 
+    /**
+     * Get the parser responsible for generating the diff/opcodes.
+     *
+     * @return cogpowered\FineDiff\Parser\ParserInterface
+     */
     public function getParser()
     {
         return $this->parser;
     }
 
+    /**
+     * Set the parser.
+     *
+     * @param cogpowered\FineDiff\Parser\ParserInterface $parser
+     * @return void
+     */
     public function setParser(ParserInterface $parser)
     {
         $this->parser = $parser;
     }
 
     /**
-     * Gets the diff between two sets of text.
+     * Gets the diff / opcodes between two strings.
      *
      * Returns the opcode diff which can be used for example, to
      * to generate a HTML report of the differences.
      *
-     * @return string
+     * @return cogpowered\FineDiff\Parser\Opcodes
      */
     public function getOpcodes($from_text, $to_text)
     {
         return $this->parser->parse($from_text, $to_text);
     }
 
+    /**
+     * Render the difference between two strings.
+     *
+     * By default will return the difference as HTML.
+     *
+     * @param string $from_text
+     * @param string $to_text
+     * @return string
+     */
     public function render($from_text, $to_text)
     {
         // First we need the opcodes

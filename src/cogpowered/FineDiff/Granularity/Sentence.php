@@ -20,6 +20,9 @@ namespace cogpowered\FineDiff\Granularity;
 
 use cogpowered\FineDiff\Delimiters;
 
+/**
+ * Sentence level granularity.
+ */
 class Sentence extends Granularity
 {
     protected $delimiters = array(

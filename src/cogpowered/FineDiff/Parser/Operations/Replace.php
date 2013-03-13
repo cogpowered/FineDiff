@@ -20,27 +20,45 @@ namespace cogpowered\FineDiff\Parser\Operations;
 
 class Replace implements OperationInterface
 {
+    /**
+     * @param int $fromLen
+     * @param string $text
+     */
     public function __construct($fromLen, $text)
     {
         $this->fromLen = $fromLen;
         $this->text    = $text;
     }
 
+    /**
+     * @inheritdoc
+     */
     public function getFromLen()
     {
         return $this->fromLen;
     }
 
+    /**
+     * @inheritdoc
+     */
     public function getToLen()
     {
         return strlen($this->text);
     }
 
+    /**
+     * Get the text the operation is working with.
+     *
+     * @return string
+     */
     public function getText()
     {
         return $this->text;
     }
 
+    /**
+     * @inheritdoc
+     */
     public function getOpcode()
     {
         if ($this->fromLen === 1) {

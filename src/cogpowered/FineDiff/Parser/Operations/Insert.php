@@ -18,28 +18,48 @@
 
 namespace cogpowered\FineDiff\Parser\Operations;
 
+/**
+ * Generates the opcode for a copy operation.
+ */
 class Insert implements OperationInterface
 {
+    /**
+     * Sets the text that the operation is working with.
+     *
+     * @param string $text
+     */
     public function __construct($text)
     {
         $this->text = $text;
     }
 
+    /**
+     * @inheritdoc
+     */
     public function getFromLen()
     {
         return 0;
     }
 
+    /**
+     * @inheritdoc
+     */
     public function getToLen()
     {
         return strlen($this->text);
     }
 
+    /**
+     * @inheritdoc
+     */
     public function getText()
     {
         return $this->text;
     }
 
+    /**
+     * @inheritdoc
+     */
     public function getOpcode()
     {
         $to_len = strlen($this->text);

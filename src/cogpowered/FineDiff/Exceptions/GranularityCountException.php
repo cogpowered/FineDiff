@@ -18,4 +18,7 @@
 
 namespace cogpowered\FineDiff\Exceptions;
 
+/**
+ * A granularity must have at least one thing to match against. Thrown when this isn't the case.
+ */
 class GranularityCountException extends \Exception {}

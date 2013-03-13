@@ -22,8 +22,62 @@ use cogpowered\FineDiff\Granularity\GranularityInterface;
 
 interface ParserInterface
 {
+    /**
+     * Creates an instance.
+     *
+     * @param cogpowered\FineDiff\Granularity\GranularityInterface
+     */
     public function __construct(GranularityInterface $granularity);
+
+    /**
+     * Granularity the parser is working with.
+     *
+     * Default is cogpowered\FineDiff\Granularity\Character.
+     *
+     * @see cogpowered\FineDiff\Granularity\Character
+     * @see cogpowered\FineDiff\Granularity\Word
+     * @see cogpowered\FineDiff\Granularity\Sentence
+     * @see cogpowered\FineDiff\Granularity\Paragraph
+     *
+     * @return cogpowered\FineDiff\Granularity\GranularityInterface
+     */
     public function getGranularity();
+
+    /**
+     * Set the granularity that the parser is working with.
+     *
+     * @see cogpowered\FineDiff\Granularity\Character
+     * @see cogpowered\FineDiff\Granularity\Word
+     * @see cogpowered\FineDiff\Granularity\Sentence
+     * @see cogpowered\FineDiff\Granularity\Paragraph
+     *
+     * @param cogpowered\FineDiff\Granularity\GranularityInterface
+     * @return void
+     */
     public function setGranularity(GranularityInterface $granularity);
+
+    /**
+     * Get the opcodes object that is used to store all the opcodes.
+     *
+     * @return cogpowered\FineDiff\Parser\OpcodesInterface
+     */
+    public function getOpcodes();
+
+    /**
+     * Set the opcodes object used to store all the opcodes for this parse.
+     *
+     * @param cogpowered\FineDiff\Parser\OpcodesInterface $opcodes.
+     * @return void
+     */
+    public function setOpcodes(OpcodesInterface $opcodes);
+
+    /**
+     * Generates the opcodes needed to transform one string to another.
+     *
+     * @param string $from_text
+     * @param string $to_text
+     * @throws cogpowered\FineDiff\Exceptions\GranularityCountException
+     * @return cogpowered\FineDiff\Parser\OpcodesInterface
+     */
     public function parse($from_text, $to_text);
 }

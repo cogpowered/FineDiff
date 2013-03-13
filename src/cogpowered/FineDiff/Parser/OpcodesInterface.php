@@ -20,8 +20,34 @@ namespace cogpowered\FineDiff\Parser;
 
 interface OpcodesInterface
 {
+    /**
+     * Get the opcodes.
+     *
+     * @return array
+     */
     public function getOpcodes();
+
+    /**
+     * Set the opcodes for this parse.
+     *
+     * @param array $opcodes Elements must be an instance of cogpowered\FineDiff\Parser\Operations\OperationInterface.
+     * @throws cogpowered\FineDiff\Exceptions\OperationException
+     * @return void
+     */
     public function setOpcodes(array $opcodes);
+
+    /**
+     * Return the opcodes in a format that can then be rendered.
+     *
+     * @return string
+     */
     public function generate();
+
+    /**
+     * When object is cast to a string returns opcodes as string.
+     *
+     * @see Opcodes::generate
+     * @return string
+     */
     public function __toString();
 }

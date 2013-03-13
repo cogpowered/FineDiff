@@ -18,23 +18,40 @@
 
 namespace cogpowered\FineDiff\Parser\Operations;
 
+/**
+ * Generates the opcode for a copy operation.
+ */
 class Copy implements OperationInterface
 {
+    /**
+     * Set the initial length.
+     *
+     * @param int $len Length of string.
+     */
     public function __construct($len)
     {
         $this->len = $len;
     }
 
+    /**
+     * @inheritdoc
+     */
     public function getFromLen()
     {
         return $this->len;
     }
 
+    /**
+     * @inheritdoc
+     */
     public function getToLen()
     {
         return $this->len;
     }
 
+    /**
+     * @inheritdoc
+     */
     public function getOpcode()
     {
         if ($this->len === 1) {
@@ -44,6 +61,12 @@ class Copy implements OperationInterface
         return "c{$this->len}";
     }
 
+    /**
+     * Increase the length of the string.
+     *
+     * @param int $size Amount to increase the string length by.
+     * @return int New length
+     */
     public function increase($size)
     {
         return $this->len += $size;
