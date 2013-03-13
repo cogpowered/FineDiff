@@ -1,0 +1,10 @@
+This is the 1st sentence. Its then carried on into another.
+This is another paragraph, just to test things further!
+==========
+This is the 1st sentence. It then carries on into another.
+This is another paragraph, just to test things further!
+==========
+c28dc12di:sc73
+==========
+This is the 1st sentence. It<del>s</del> then carrie<del>d</del><ins>s</ins> on into another.
+This is another paragraph, just to test things further!

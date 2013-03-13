@@ -1,0 +1,12 @@
+This is the 1st sentence. Its then carried on into another.
+This is another paragraph, just to test things further!
+==========
+This is the 1st sentence. It then carries on into another.
+This is another paragraph, just to test things further!
+==========
+d60i59:This is the 1st sentence. It then carries on into another.
+c55
+==========
+<del>This is the 1st sentence. Its then carried on into another.
+</del><ins>This is the 1st sentence. It then carries on into another.
+</ins>This is another paragraph, just to test things further!
