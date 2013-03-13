@@ -57,6 +57,11 @@ class Parser implements ParserInterface
      */
     protected $stackpointer = 0;
 
+    /**
+     * @var array Holds the individual opcodes as the diff takes place.
+     */
+    protected $edits = array();
+
 
     public function __construct(GranularityInterface $granularity)
     {
@@ -101,6 +106,7 @@ class Parser implements ParserInterface
         $this->from_offset  = 0;
         $this->last_edit    = null;
         $this->stackpointer = 0;
+        $this->edits        = array();
 
         // Parse the two string
         $this->process($from_text, $to_text);
