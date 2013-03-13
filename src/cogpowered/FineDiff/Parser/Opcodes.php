@@ -31,6 +31,8 @@ class Opcodes implements OpcodesInterface
 
     public function setOpcodes(array $opcodes)
     {
+        $this->opcodes = array();
+
         // Ensure that all elements of the array
         // are of the correct type
         foreach ($opcodes as $opcode) {
