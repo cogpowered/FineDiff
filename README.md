@@ -29,8 +29,6 @@ Usage
 Render as HTML the difference between two strings:
 
 ```php
-<?php
-
 $diff = new cogpowered\FineDiff\Diff;
 echo $diff->render('string one', 'string two');
 ```
@@ -47,6 +45,13 @@ You could change the granularity to `cogpowered\FineDiff\Granularity\Word` so th
 string <del>one</del><ins>two</ins>
 ```
 
+You do this by passing it into the Diff constructor:
+
+```php
+$granularity = new cogpowered\FineDiff\Granularity\Word;
+$diff        = new cogpowered\FineDiff\Diff($granularity);
+```
+
 **Grab opcode instructions**
 
 Opcode instructions are what tell FineDiff how to change one string into another.
@@ -54,7 +59,7 @@ Opcode instructions are what tell FineDiff how to change one string into another
 ```php
 $diff = new cogpowered\FineDiff\Diff;
 echo $diff->getOpcodes('string one', 'string two');
-``
+```
 
 This would then output:
 
@@ -82,7 +87,7 @@ echo $render->process('string one', 'c7d3i3:two');
 License
 -------
 
-Copyright (c) 2011 Raymond Hill (http://raymondhill.net/blog/?p=441)
+Copyright (c) 2011 Raymond Hill (http://raymondhill.net/blog/?p=441)  
 Copyright (c) 2013 Rob Crowe (http://cogpowered.com)
 
 Licensed under The MIT License
