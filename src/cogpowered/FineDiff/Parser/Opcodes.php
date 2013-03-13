@@ -24,7 +24,12 @@ class Opcodes implements OpcodesInterface
 {
     protected $opcodes = array();
 
-    public function __construct(array $opcodes)
+    public function getOpcodes()
+    {
+        return $this->opcodes;
+    }
+
+    public function setOpcodes(array $opcodes)
     {
         // Ensure that all elements of the array
         // are of the correct type
@@ -35,11 +40,6 @@ class Opcodes implements OpcodesInterface
 
             $this->opcodes[] = $opcode->getOpcode();
         }
-    }
-
-    public function getOpcodes()
-    {
-        return $this->opcodes;
     }
 
     public function generate()

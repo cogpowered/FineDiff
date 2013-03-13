@@ -28,9 +28,14 @@ use cogpowered\FineDiff\Parser\Operations\Replace;
 class Parser implements ParserInterface
 {
     /**
-     * @var rcrowe\FineDiff\GranularityInterface
+     * @var cogpowered\FineDiff\GranularityInterface
      */
     protected $granularity;
+
+    /**
+     * @var cogpowered\FineDiff\Parser\OpcodesInterface
+     */
+    protected $opcodes;
 
     /**
      * @var string Text we are comparing against.
@@ -56,6 +61,9 @@ class Parser implements ParserInterface
     public function __construct(GranularityInterface $granularity)
     {
         $this->granularity = $granularity;
+
+        // Set default opcodes generator
+        $this->opcodes = new Opcodes;
     }
 
     public function getGranularity()
@@ -66,6 +74,16 @@ class Parser implements ParserInterface
     public function setGranularity(GranularityInterface $granularity)
     {
         $this->granularity = $granularity;
+    }
+
+    public function getOpcodes()
+    {
+        return $this->opcodes;
+    }
+
+    public function setOpcodes(OpcodesInterface $opcodes)
+    {
+        $this->opcodes = $opcodes;
     }
 
     /**
@@ -88,7 +106,8 @@ class Parser implements ParserInterface
         $this->process($from_text, $to_text);
 
         // Return processed diff
-        return new Opcodes($this->edits);
+        $this->opcodes->setOpcodes($this->edits);
+        return $this->opcodes;
     }
 
     protected function process($from_text, $to_text)

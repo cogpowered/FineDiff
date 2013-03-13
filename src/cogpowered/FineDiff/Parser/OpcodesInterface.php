@@ -20,8 +20,8 @@ namespace cogpowered\FineDiff\Parser;
 
 interface OpcodesInterface
 {
-    public function __construct(array $opcodes);
     public function getOpcodes();
+    public function setOpcodes(array $opcodes);
     public function generate();
     public function __toString();
 }
