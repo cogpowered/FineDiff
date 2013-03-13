@@ -8,20 +8,32 @@ use cogpowered\FineDiff\Parser\Opcodes;
 
 class OpcodesTest extends PHPUnit_Framework_TestCase
 {
-    public function setUp()
-    {
-        $operation_once = m::mock('cogpowered\FineDiff\Parser\Operations\Copy');
-        $operation_once->shouldReceive('getOpcode')->andReturn('c5i');
-
-        $operation_two = m::mock('cogpowered\FineDiff\Parser\Operations\Copy');
-        $operation_two->shouldReceive('getOpcode')->andReturn('2c6d');
-
-        $this->opcodes = new Opcodes(array($operation_once, $operation_two));
-    }
-
     public function tearDown()
     {
         m::close();
+    }
+
+    public function testInstanceOf()
+    {
+        $this->assertTrue(is_a(new Opcodes, 'cogpowered\FineDiff\Parser\OpcodesInterface'));
+    }
+
+    public function testEmptyOpcodes()
+    {
+        $opcodes = new Opcodes;
+        $this->assertEmpty($opcodes->getOpcodes());
+    }
+
+    public function testSetOpcodes()
+    {
+        $operation = m::mock('cogpowered\FineDiff\Parser\Operations\Copy');
+        $operation->shouldReceive('getOpcode')->once()->andReturn('testing');
+
+        $opcodes = new Opcodes;
+        $opcodes->setOpcodes(array($operation));
+
+        $opcodes = $opcodes->getOpcodes();
+        $this->assertEquals($opcodes[0], 'testing');
     }
 
     /**
@@ -29,24 +41,22 @@ class OpcodesTest extends PHPUnit_Framework_TestCase
      */
     public function testNotOperation()
     {
-        new Opcodes(array(
-            'test'
-        ));
-    }
-
-    public function testGetOpcode()
-    {
-        $operation = m::mock('cogpowered\FineDiff\Parser\Operations\Copy');
-        $operation->shouldReceive('getOpcode')->once();
-
-        new Opcodes(array(
-            $operation
-        ));
+        $opcodes = new Opcodes;
+        $opcodes->setOpcodes(array('test'));
     }
 
     public function testGetOpcodes()
     {
-        $opcodes = $this->opcodes->getOpcodes();
+        $operation_one = m::mock('cogpowered\FineDiff\Parser\Operations\Copy');
+        $operation_one->shouldReceive('getOpcode')->andReturn('c5i');
+
+        $operation_two = m::mock('cogpowered\FineDiff\Parser\Operations\Copy');
+        $operation_two->shouldReceive('getOpcode')->andReturn('2c6d');
+
+        $opcodes = new Opcodes;
+        $opcodes->setOpcodes(array($operation_one, $operation_two));
+
+        $opcodes = $opcodes->getOpcodes();
 
         $this->assertTrue(is_array($opcodes));
         $this->assertEquals($opcodes[0], 'c5i');
@@ -55,11 +65,30 @@ class OpcodesTest extends PHPUnit_Framework_TestCase
 
     public function testGenerate()
     {
-        $this->assertEquals($this->opcodes->generate(), 'c5i2c6d');
+        $operation_one = m::mock('cogpowered\FineDiff\Parser\Operations\Copy');
+        $operation_one->shouldReceive('getOpcode')->andReturn('c5i');
+
+        $operation_two = m::mock('cogpowered\FineDiff\Parser\Operations\Copy');
+        $operation_two->shouldReceive('getOpcode')->andReturn('2c6d');
+
+        $opcodes = new Opcodes;
+        $opcodes->setOpcodes(array($operation_one, $operation_two));
+
+        $this->assertEquals($opcodes->generate(), 'c5i2c6d');
     }
 
     public function testToString()
     {
-        $this->assertEquals((string)$this->opcodes, $this->opcodes->generate());
+        $operation_one = m::mock('cogpowered\FineDiff\Parser\Operations\Copy');
+        $operation_one->shouldReceive('getOpcode')->andReturn('c5i');
+
+        $operation_two = m::mock('cogpowered\FineDiff\Parser\Operations\Copy');
+        $operation_two->shouldReceive('getOpcode')->andReturn('2c6d');
+
+        $opcodes = new Opcodes;
+        $opcodes->setOpcodes(array($operation_one, $operation_two));
+
+        $this->assertEquals((string)$opcodes, 'c5i2c6d');
+        $this->assertEquals((string)$opcodes, $opcodes->generate());
     }
 }
