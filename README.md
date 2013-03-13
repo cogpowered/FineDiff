@@ -3,6 +3,8 @@ FineDiff
 
 Originally written by Raymond Hill ([https://github.com/gorhill/PHP-FineDiff](https://github.com/gorhill/PHP-FineDiff)) FineDiff has been tweaked to bring it up to date with the modern world. That means documented, nicely formatted, tested code that can be easily extended.
 
+[![Build Status](https://travis-ci.org/cogpowered/FineDiff.png?branch=master)](https://travis-ci.org/cogpowered/FineDiff)
+
 Installation
 ------------
 
