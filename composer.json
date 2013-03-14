@@ -23,6 +23,5 @@
     },
     "autoload": {
         "psr-0": { "cogpowered\\FineDiff": "src/" }
-    },
-    "minimum-stability": "dev"
+    }
 }
