@@ -22,12 +22,12 @@ use cogpowered\FineDiff\Parser\OpcodesInterface;
 
 abstract class Renderer implements RendererInterface
 {
-    public function process($from_text, OpcodesInterface $opcodes)
+    public function process($from_text, $opcodes)
     {
         // Holds the generated string that is returned
         $output = '';
 
-        $opcodes        = $opcodes->generate();
+        $opcodes        = ($opcodes instanceof OpcodesInterface) ? $opcodes->generate() : $opcodes;
         $opcodes_len    = strlen($opcodes);
         $from_offset    = 0;
         $opcodes_offset = 0;
