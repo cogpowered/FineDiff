@@ -18,7 +18,7 @@ class CallbackTest extends PHPUnit_Framework_TestCase
         $this->assertEquals($output, 'Hello');
 
         $output = $this->html->callback('c', 'He&llo', 0, 100);
-        $this->assertEquals($output, 'He&amp;amp;llo');
+        $this->assertEquals($output, 'He&amp;llo');
     }
 
     public function testDelete()
@@ -27,7 +27,7 @@ class CallbackTest extends PHPUnit_Framework_TestCase
         $this->assertEquals($output, '<del>el</del>');
 
         $output = $this->html->callback('d', "e&l", 0, 100);
-        $this->assertEquals($output, '<del>e&amp;amp;l</del>');
+        $this->assertEquals($output, '<del>e&amp;l</del>');
     }
 
     public function testInsert()
@@ -36,6 +36,6 @@ class CallbackTest extends PHPUnit_Framework_TestCase
         $this->assertEquals($output, '<ins>monkey</ins>');
 
         $output = $this->html->callback('i', "mon&key", 0, 100);
-        $this->assertEquals($output, '<ins>mon&amp;amp;key</ins>');
+        $this->assertEquals($output, '<ins>mon&amp;key</ins>');
     }
 }
