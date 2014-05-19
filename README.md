@@ -17,10 +17,17 @@ Add the following to your composer.json file:
 ```json
 {
     "require": {
-        "cogpowered/finediff": "0.2.*"
+        "cogpowered/finediff": "0.3.*"
     }
 }
 ```
+
+Upgrading
+---------
+
+**0.3.x** introduces a backwards incompatible version, so if you have stored opcodes do not upgrade!
+
+`0.3.x` fixes a double encoding issue that generates a longer opcode than is needed.
 
 Usage
 -----
