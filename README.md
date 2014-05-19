@@ -17,7 +17,7 @@ Add the following to your composer.json file:
 ```json
 {
     "require": {
-        "cogpowered/finediff": "0.0.*"
+        "cogpowered/finediff": "0.2.*"
     }
 }
 ```
@@ -89,7 +89,7 @@ echo $render->process('string one', 'c7d3i3:two');
 License
 -------
 
-Copyright (c) 2011 Raymond Hill (http://raymondhill.net/blog/?p=441)  
+Copyright (c) 2011 Raymond Hill (http://raymondhill.net/blog/?p=441)
 Copyright (c) 2013 Rob Crowe (http://cogpowered.com)
 
 Licensed under The MIT License
