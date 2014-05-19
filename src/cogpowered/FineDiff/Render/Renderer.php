@@ -19,15 +19,30 @@
 namespace cogpowered\FineDiff\Render;
 
 use cogpowered\FineDiff\Parser\OpcodesInterface;
+use InvalidArgumentException;
 
 abstract class Renderer implements RendererInterface
 {
-    public function process($from_text, OpcodesInterface $opcodes)
+    /**
+     * Covert text based on the provided opcodes.
+     *
+     * @param string                                              $from_text
+     * @param string|\cogpowered\FineDiff\Parser\OpcodesInterface $opcodes
+     *
+     * @return string
+     */
+    public function process($from_text, $opcodes)
     {
+        // Validate opcodes
+        if (!is_string($opcodes) && !($opcodes instanceof OpcodesInterface)) {
+            throw new InvalidArgumentException('Invalid opcodes type');
+        } else {
+            $opcodes = ($opcodes instanceof OpcodesInterface) ? $opcodes->generate() : $opcodes;
+        }
+
         // Holds the generated string that is returned
         $output = '';
 
-        $opcodes        = $opcodes->generate();
         $opcodes_len    = strlen($opcodes);
         $from_offset    = 0;
         $opcodes_offset = 0;

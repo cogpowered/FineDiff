@@ -18,6 +18,21 @@ class ProcessTest extends PHPUnit_Framework_TestCase
         m::close();
     }
 
+    /**
+     * @expectedException InvalidArgumentException
+     */
+    public function testInvalidOpcode()
+    {
+        $this->text->process('Hello worlds', 123);
+    }
+
+    public function testProcessWithString()
+    {
+        $html = $this->text->process('Hello worlds', 'c5i:2c6d');
+
+        $this->assertEquals($html, 'Hello2 world');
+    }
+
     public function testProcess()
     {
         $opcodes = m::mock('cogpowered\FineDiff\Parser\Opcodes');
