@@ -7,23 +7,23 @@
  * one string into another.
  *
  * Originally created by Raymond Hill (https://github.com/gorhill/PHP-FineDiff), brought up
- * to date by Cog Powered (https://github.com/cogpowered/FineDiff).
+ * to date by Cog Powered (https://github.com/bariew/FineDiff).
  *
  * @copyright Copyright 2011 (c) Raymond Hill (http://raymondhill.net/blog/?p=441)
- * @copyright Copyright 2013 (c) Robert Crowe (http://cogpowered.com)
- * @link https://github.com/cogpowered/FineDiff
+ * @copyright Copyright 2013 (c) Robert Crowe (http://bariew.com)
+ * @link https://github.com/bariew/FineDiff
  * @version 0.0.1
  * @license MIT License (http://www.opensource.org/licenses/mit-license.php)
  */
 
-namespace cogpowered\FineDiff\Parser;
+namespace bariew\FineDiff\Parser;
 
-use cogpowered\FineDiff\Granularity\GranularityInterface;
-use cogpowered\FineDiff\Exceptions\GranularityCountException;
-use cogpowered\FineDiff\Parser\Operations\Copy;
-use cogpowered\FineDiff\Parser\Operations\Delete;
-use cogpowered\FineDiff\Parser\Operations\Insert;
-use cogpowered\FineDiff\Parser\Operations\Replace;
+use bariew\FineDiff\Granularity\GranularityInterface;
+use bariew\FineDiff\Exceptions\GranularityCountException;
+use bariew\FineDiff\Parser\Operations\Copy;
+use bariew\FineDiff\Parser\Operations\Delete;
+use bariew\FineDiff\Parser\Operations\Insert;
+use bariew\FineDiff\Parser\Operations\Replace;
 
 /**
  * Generates a set of instructions to convert one string to another.
@@ -31,12 +31,12 @@ use cogpowered\FineDiff\Parser\Operations\Replace;
 class Parser implements ParserInterface
 {
     /**
-     * @var cogpowered\FineDiff\GranularityInterface
+     * @var bariew\FineDiff\GranularityInterface
      */
     protected $granularity;
 
     /**
-     * @var cogpowered\FineDiff\Parser\OpcodesInterface
+     * @var bariew\FineDiff\Parser\OpcodesInterface
      */
     protected $opcodes;
 
@@ -51,7 +51,7 @@ class Parser implements ParserInterface
     protected $from_offset = 0;
 
     /**
-     * @var cogpowered\FineDiff\Operations\OperationInterface
+     * @var bariew\FineDiff\Operations\OperationInterface
      */
     protected $last_edit;
 
