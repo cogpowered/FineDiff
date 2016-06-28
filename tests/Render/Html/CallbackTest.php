@@ -3,7 +3,7 @@
 namespace FineDiffTests\Render\Html;
 
 use PHPUnit_Framework_TestCase;
-use cogpowered\FineDiff\Render\Html;
+use bariew\FineDiff\Render\Html;
 
 class CallbackTest extends PHPUnit_Framework_TestCase
 {

@@ -3,7 +3,7 @@
 namespace FineDiffTests\Delimiters;
 
 use PHPUnit_Framework_TestCase;
-use cogpowered\FineDiff\Delimiters;
+use bariew\FineDiff\Delimiters;
 
 class ConstantsTest extends PHPUnit_Framework_TestCase
 {

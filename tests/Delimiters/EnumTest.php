@@ -8,7 +8,7 @@ class EnumTest extends PHPUnit_Framework_TestCase
 {
     public function testCantInstantiate()
     {
-        $class   = new \ReflectionClass('cogpowered\FineDiff\Delimiters');
+        $class   = new \ReflectionClass('bariew\FineDiff\Delimiters');
         $methods = $class->getMethods(\ReflectionMethod::IS_PRIVATE);
 
         $this->assertTrue(count($methods) >= 1);

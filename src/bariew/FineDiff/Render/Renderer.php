@@ -7,18 +7,18 @@
  * one string into another.
  *
  * Originally created by Raymond Hill (https://github.com/gorhill/PHP-FineDiff), brought up
- * to date by Cog Powered (https://github.com/cogpowered/FineDiff).
+ * to date by Cog Powered (https://github.com/bariew/FineDiff).
  *
  * @copyright Copyright 2011 (c) Raymond Hill (http://raymondhill.net/blog/?p=441)
- * @copyright Copyright 2013 (c) Robert Crowe (http://cogpowered.com)
- * @link https://github.com/cogpowered/FineDiff
+ * @copyright Copyright 2013 (c) Robert Crowe (http://bariew.com)
+ * @link https://github.com/bariew/FineDiff
  * @version 0.0.1
  * @license MIT License (http://www.opensource.org/licenses/mit-license.php)
  */
 
-namespace cogpowered\FineDiff\Render;
+namespace bariew\FineDiff\Render;
 
-use cogpowered\FineDiff\Parser\OpcodesInterface;
+use bariew\FineDiff\Parser\OpcodesInterface;
 use InvalidArgumentException;
 
 abstract class Renderer implements RendererInterface
@@ -27,7 +27,7 @@ abstract class Renderer implements RendererInterface
      * Covert text based on the provided opcodes.
      *
      * @param string                                              $from_text
-     * @param string|\cogpowered\FineDiff\Parser\OpcodesInterface $opcodes
+     * @param string|\bariew\FineDiff\Parser\OpcodesInterface $opcodes
      *
      * @return string
      */
@@ -43,18 +43,18 @@ abstract class Renderer implements RendererInterface
         // Holds the generated string that is returned
         $output = '';
 
-        $opcodes_len    = strlen($opcodes);
+        $opcodes_len    = mb_strlen($opcodes);
         $from_offset    = 0;
         $opcodes_offset = 0;
 
         while ($opcodes_offset < $opcodes_len) {
 
-            $opcode = substr($opcodes, $opcodes_offset, 1);
+            $opcode = mb_substr($opcodes, $opcodes_offset, 1);
             $opcodes_offset++;
-            $n = intval(substr($opcodes, $opcodes_offset));
+            $n = intval(mb_substr($opcodes, $opcodes_offset));
 
             if ($n) {
-                $opcodes_offset += strlen(strval($n));
+                $opcodes_offset += mb_strlen(strval($n));
             } else {
                 $n = 1;
             }

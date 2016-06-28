@@ -4,7 +4,7 @@ namespace FineDiffTests\Parser;
 
 use PHPUnit_Framework_TestCase;
 use Mockery as m;
-use cogpowered\FineDiff\Parser\Opcodes;
+use bariew\FineDiff\Parser\Opcodes;
 
 class OpcodesTest extends PHPUnit_Framework_TestCase
 {
@@ -15,7 +15,7 @@ class OpcodesTest extends PHPUnit_Framework_TestCase
 
     public function testInstanceOf()
     {
-        $this->assertTrue(is_a(new Opcodes, 'cogpowered\FineDiff\Parser\OpcodesInterface'));
+        $this->assertTrue(is_a(new Opcodes, 'bariew\FineDiff\Parser\OpcodesInterface'));
     }
 
     public function testEmptyOpcodes()
@@ -26,7 +26,7 @@ class OpcodesTest extends PHPUnit_Framework_TestCase
 
     public function testSetOpcodes()
     {
-        $operation = m::mock('cogpowered\FineDiff\Parser\Operations\Copy');
+        $operation = m::mock('bariew\FineDiff\Parser\Operations\Copy');
         $operation->shouldReceive('getOpcode')->once()->andReturn('testing');
 
         $opcodes = new Opcodes;
@@ -37,7 +37,7 @@ class OpcodesTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException cogpowered\FineDiff\Exceptions\OperationException
+     * @expectedException bariew\FineDiff\Exceptions\OperationException
      */
     public function testNotOperation()
     {
@@ -47,10 +47,10 @@ class OpcodesTest extends PHPUnit_Framework_TestCase
 
     public function testGetOpcodes()
     {
-        $operation_one = m::mock('cogpowered\FineDiff\Parser\Operations\Copy');
+        $operation_one = m::mock('bariew\FineDiff\Parser\Operations\Copy');
         $operation_one->shouldReceive('getOpcode')->andReturn('c5i');
 
-        $operation_two = m::mock('cogpowered\FineDiff\Parser\Operations\Copy');
+        $operation_two = m::mock('bariew\FineDiff\Parser\Operations\Copy');
         $operation_two->shouldReceive('getOpcode')->andReturn('2c6d');
 
         $opcodes = new Opcodes;
@@ -65,10 +65,10 @@ class OpcodesTest extends PHPUnit_Framework_TestCase
 
     public function testGenerate()
     {
-        $operation_one = m::mock('cogpowered\FineDiff\Parser\Operations\Copy');
+        $operation_one = m::mock('bariew\FineDiff\Parser\Operations\Copy');
         $operation_one->shouldReceive('getOpcode')->andReturn('c5i');
 
-        $operation_two = m::mock('cogpowered\FineDiff\Parser\Operations\Copy');
+        $operation_two = m::mock('bariew\FineDiff\Parser\Operations\Copy');
         $operation_two->shouldReceive('getOpcode')->andReturn('2c6d');
 
         $opcodes = new Opcodes;
@@ -79,10 +79,10 @@ class OpcodesTest extends PHPUnit_Framework_TestCase
 
     public function testToString()
     {
-        $operation_one = m::mock('cogpowered\FineDiff\Parser\Operations\Copy');
+        $operation_one = m::mock('bariew\FineDiff\Parser\Operations\Copy');
         $operation_one->shouldReceive('getOpcode')->andReturn('c5i');
 
-        $operation_two = m::mock('cogpowered\FineDiff\Parser\Operations\Copy');
+        $operation_two = m::mock('bariew\FineDiff\Parser\Operations\Copy');
         $operation_two->shouldReceive('getOpcode')->andReturn('2c6d');
 
         $opcodes = new Opcodes;

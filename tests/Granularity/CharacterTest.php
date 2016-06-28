@@ -3,8 +3,8 @@
 namespace FineDiffTests\Granularity;
 
 use PHPUnit_Framework_TestCase;
-use cogpowered\FineDiff\Delimiters;
-use cogpowered\FineDiff\Granularity\Character;
+use bariew\FineDiff\Delimiters;
+use bariew\FineDiff\Granularity\Character;
 
 class CharacterTest extends PHPUnit_Framework_TestCase
 {
@@ -22,8 +22,8 @@ class CharacterTest extends PHPUnit_Framework_TestCase
 
     public function testExtendsAndImplements()
     {
-        $this->assertTrue(is_a($this->character, 'cogpowered\FineDiff\Granularity\Granularity'));
-        $this->assertTrue(is_a($this->character, 'cogpowered\FineDiff\Granularity\GranularityInterface'));
+        $this->assertTrue(is_a($this->character, 'bariew\FineDiff\Granularity\Granularity'));
+        $this->assertTrue(is_a($this->character, 'bariew\FineDiff\Granularity\GranularityInterface'));
         $this->assertTrue(is_a($this->character, 'ArrayAccess'));
         $this->assertTrue(is_a($this->character, 'Countable'));
     }

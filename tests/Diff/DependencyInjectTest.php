@@ -4,7 +4,7 @@ namespace FineDiffTests\Diff;
 
 use PHPUnit_Framework_TestCase;
 use Mockery as m;
-use cogpowered\FineDiff\Diff;
+use bariew\FineDiff\Diff;
 
 class DependencyInjectTest extends PHPUnit_Framework_TestCase
 {
@@ -15,7 +15,7 @@ class DependencyInjectTest extends PHPUnit_Framework_TestCase
 
     public function testGetGranularity()
     {
-        $character = m::mock('cogpowered\FineDiff\Granularity\Character');
+        $character = m::mock('bariew\FineDiff\Granularity\Character');
         $character->shouldReceive('justTesting')->once();
 
         $diff = new Diff($character);
@@ -26,7 +26,7 @@ class DependencyInjectTest extends PHPUnit_Framework_TestCase
 
     public function testGetRenderer()
     {
-        $html = m::mock('cogpowered\FineDiff\Render\Html');
+        $html = m::mock('bariew\FineDiff\Render\Html');
         $html->shouldReceive('justTesting')->once();
 
         $diff = new Diff(null, $html);
@@ -37,13 +37,13 @@ class DependencyInjectTest extends PHPUnit_Framework_TestCase
 
     public function testRender()
     {
-        $opcodes = m::mock('cogpowered\FineDiff\Parser\Opcodes');
+        $opcodes = m::mock('bariew\FineDiff\Parser\Opcodes');
         $opcodes->shouldReceive('generate')->andReturn('c12');
 
-        $parser = m::mock('cogpowered\FineDiff\Parser\Parser');
+        $parser = m::mock('bariew\FineDiff\Parser\Parser');
         $parser->shouldReceive('parse')->andReturn($opcodes);
 
-        $html = m::mock('cogpowered\FineDiff\Render\Html');
+        $html = m::mock('bariew\FineDiff\Render\Html');
         $html->shouldReceive('process')->with('hello', $opcodes)->once();
 
 
@@ -53,7 +53,7 @@ class DependencyInjectTest extends PHPUnit_Framework_TestCase
 
     public function testGetParser()
     {
-        $parser = m::mock('cogpowered\FineDiff\Parser\Parser');
+        $parser = m::mock('bariew\FineDiff\Parser\Parser');
         $parser->shouldReceive('justTesting')->once();
 
         $diff = new Diff(null, null, $parser);
@@ -64,7 +64,7 @@ class DependencyInjectTest extends PHPUnit_Framework_TestCase
 
     public function testGetOpcodes()
     {
-        $parser = m::mock('cogpowered\FineDiff\Parser\Parser');
+        $parser = m::mock('bariew\FineDiff\Parser\Parser');
         $parser->shouldReceive('parse')->with('foobar', 'eggfooba')->once();
 
         $diff = new Diff(null, null, $parser);
