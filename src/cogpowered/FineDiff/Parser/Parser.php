@@ -155,7 +155,7 @@ class Parser implements ParserInterface
             // increase granularity
             if ($fragment instanceof Replace && $has_next_stage) {
                 $this->process(
-                    substr($this->from_text, $this->from_offset, $fragment->getFromLen()),
+                    mb_substr($this->from_text, $this->from_offset, $fragment->getFromLen()),
                     $fragment->getText()
                 );
             }
@@ -195,8 +195,8 @@ class Parser implements ParserInterface
         $result = array();
 
         // fragment-level diffing
-        $from_text_len  = strlen($from_text);
-        $to_text_len    = strlen($to_text);
+        $from_text_len  = mb_strlen($from_text);
+        $to_text_len    = mb_strlen($to_text);
         $from_fragments = $this->extractFragments($from_text, $delimiters);
         $to_fragments   = $this->extractFragments($to_text, $delimiters);
 
@@ -218,7 +218,7 @@ class Parser implements ParserInterface
                 if ( $from_segment_length ) {
                     $result[$from_segment_start * 4] = new Delete($from_segment_length);
                 } else if ( $to_segment_length ) {
-                    $result[$from_segment_start * 4 + 1] = new Insert(substr($to_text, $to_segment_start, $to_segment_length));
+                    $result[$from_segment_start * 4 + 1] = new Insert(mb_substr($to_text, $to_segment_start, $to_segment_length));
                 }
 
                 continue;
@@ -233,7 +233,7 @@ class Parser implements ParserInterface
             while ( $from_base_fragment_index < $from_segment_end ) {
 
                 $from_base_fragment        = $from_fragments[$from_base_fragment_index];
-                $from_base_fragment_length = strlen($from_base_fragment);
+                $from_base_fragment_length = mb_strlen($from_base_fragment);
 
                 // performance boost: cache array keys
                 if (!isset($cached_array_keys_for_current_segment[$from_base_fragment])) {
@@ -297,7 +297,7 @@ class Parser implements ParserInterface
                             break;
                         }
 
-                        $fragment_length = strlen($from_fragments[$fragment_from_index]);
+                        $fragment_length = mb_strlen($from_fragments[$fragment_from_index]);
                         $fragment_index_offset += $fragment_length;
                     }
 
@@ -308,7 +308,7 @@ class Parser implements ParserInterface
                     }
                 }
 
-                $from_base_fragment_index += strlen($from_base_fragment);
+                $from_base_fragment_index += mb_strlen($from_base_fragment);
 
                 // If match is larger than half segment size, no point trying to find better
                 // TODO: Really?
@@ -328,7 +328,7 @@ class Parser implements ParserInterface
                 $result[$best_from_start * 4 + 2] = new Copy($best_copy_length);
                 $jobs[] = array($best_from_start + $best_copy_length, $from_segment_end, $best_to_start + $best_copy_length, $to_segment_end);
             } else {
-                $result[$from_segment_start * 4 ] = new Replace($from_segment_length, substr($to_text, $to_segment_start, $to_segment_length));
+                $result[$from_segment_start * 4 ] = new Replace($from_segment_length, mb_substr($to_text, $to_segment_start, $to_segment_length));
             }
         }
 
@@ -346,7 +346,7 @@ class Parser implements ParserInterface
     protected function charDiff($from_text, $to_text)
     {
         $result = array();
-        $jobs   = array(array(0, strlen($from_text), 0, strlen($to_text)));
+        $jobs   = array(array(0, mb_strlen($from_text), 0, mb_strlen($to_text)));
 
         while ($job = array_pop($jobs)) {
 
@@ -362,7 +362,7 @@ class Parser implements ParserInterface
                 if ($from_segment_len) {
                     $result[$from_segment_start * 4 + 0] = new Delete($from_segment_len);
                 } else if ( $to_segment_len ) {
-                    $result[$from_segment_start * 4 + 1] = new Insert(substr($to_text, $to_segment_start, $to_segment_len));
+                    $result[$from_segment_start * 4 + 1] = new Insert(mb_substr($to_text, $to_segment_start, $to_segment_len));
                 }
 
                 continue;
@@ -379,7 +379,7 @@ class Parser implements ParserInterface
 
                     while ($to_copy_start <= $to_copy_start_max) {
 
-                        $from_copy_start = strpos(substr($from_text, $from_segment_start, $from_segment_len), substr($to_text, $to_copy_start, $copy_len));
+                        $from_copy_start = mb_strpos(mb_substr($from_text, $from_segment_start, $from_segment_len), mb_substr($to_text, $to_copy_start, $copy_len));
 
                         if ($from_copy_start !== false) {
                             $from_copy_start += $from_segment_start;
@@ -402,7 +402,7 @@ class Parser implements ParserInterface
 
                     while ($from_copy_start <= $from_copy_start_max) {
 
-                        $to_copy_start = strpos(substr($to_text, $to_segment_start, $to_segment_len), substr($from_text, $from_copy_start, $copy_len));
+                        $to_copy_start = mb_strpos(mb_substr($to_text, $to_segment_start, $to_segment_len), mb_substr($from_text, $from_copy_start, $copy_len));
 
                         if ($to_copy_start !== false) {
                             $to_copy_start += $to_segment_start;
@@ -424,7 +424,7 @@ class Parser implements ParserInterface
             }
             // no match,  so delete all, insert all
             else {
-                $result[$from_segment_start * 4] = new Replace($from_segment_len, substr($to_text, $to_segment_start, $to_segment_len));
+                $result[$from_segment_start * 4] = new Replace($from_segment_len, mb_substr($to_text, $to_segment_start, $to_segment_len));
             }
         }
 
@@ -448,7 +448,7 @@ class Parser implements ParserInterface
         // special case: split into characters
         if (empty($delimiters)) {
             $chars                = str_split($text, 1);
-            $chars[strlen($text)] = '';
+            $chars[mb_strlen($text)] = '';
 
             return $chars;
         }
@@ -466,7 +466,7 @@ class Parser implements ParserInterface
                 break;
             }
 
-            $fragments[$start] = substr($text, $start, $end - $start);
+            $fragments[$start] = mb_substr($text, $start, $end - $start);
             $start             = $end;
         }
 

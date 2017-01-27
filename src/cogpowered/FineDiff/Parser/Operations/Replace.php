@@ -43,7 +43,7 @@ class Replace implements OperationInterface
      */
     public function getToLen()
     {
-        return strlen($this->text);
+        return mb_strlen($this->text);
     }
 
     /**
@@ -67,7 +67,7 @@ class Replace implements OperationInterface
             $del_opcode = "d{$this->fromLen}";
         }
 
-        $to_len = strlen($this->text);
+        $to_len = mb_strlen($this->text);
 
         if ($to_len === 1) {
             return "{$del_opcode}i:{$this->text}";

@@ -46,7 +46,7 @@ class Insert implements OperationInterface
      */
     public function getToLen()
     {
-        return strlen($this->text);
+        return mb_strlen($this->text);
     }
 
     /**
@@ -62,7 +62,7 @@ class Insert implements OperationInterface
      */
     public function getOpcode()
     {
-        $to_len = strlen($this->text);
+        $to_len = mb_strlen($this->text);
 
         if ( $to_len === 1 ) {
             return "i:{$this->text}";

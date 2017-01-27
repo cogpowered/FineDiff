@@ -25,10 +25,10 @@ class Html extends Renderer
     public function callback($opcode, $from, $from_offset, $from_len)
     {
         if ($opcode === 'c') {
-            $html = htmlentities(substr($from, $from_offset, $from_len));
+            $html = htmlentities(mb_substr($from, $from_offset, $from_len));
         } else if ($opcode === 'd') {
 
-            $deletion = substr($from, $from_offset, $from_len);
+            $deletion = mb_substr($from, $from_offset, $from_len);
 
             if (strcspn($deletion, " \n\r") === 0) {
                 $deletion = str_replace(array("\n","\r"), array('\n','\r'), $deletion);
@@ -37,7 +37,7 @@ class Html extends Renderer
             $html = '<del>'.htmlentities($deletion).'</del>';
 
         } else /* if ( $opcode === 'i' ) */ {
-            $html = '<ins>'.htmlentities(substr($from, $from_offset, $from_len)).'</ins>';
+            $html = '<ins>'.htmlentities(mb_substr($from, $from_offset, $from_len)).'</ins>';
         }
 
         return $html;
