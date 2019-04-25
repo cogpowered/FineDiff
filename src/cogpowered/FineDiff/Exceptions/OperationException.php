@@ -16,9 +16,9 @@
  * @license MIT License (http://www.opensource.org/licenses/mit-license.php)
  */
 
-namespace cogpowered\FineDiff\Exceptions;
+namespace CogPowered\FineDiff\Exceptions;
 
 /**
- * Thrown when trying to set an opcode that doesn't implement cogpowered\FineDiff\Parser\Operations\OperationInterface.
+ * Thrown when trying to set an opcode that doesn't implement CogPowered\FineDiff\Parser\Operations\OperationInterface.
  */
 class OperationException extends \Exception {}

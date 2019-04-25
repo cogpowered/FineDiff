@@ -2,11 +2,16 @@
 
 namespace FineDiffTests\Render\Text;
 
-use PHPUnit_Framework_TestCase;
-use cogpowered\FineDiff\Render\Text;
+use FineDiffTests\TestCase;
+use CogPowered\FineDiff\Render\Text;
 
-class CallbackTest extends PHPUnit_Framework_TestCase
+class CallbackTest extends TestCase
 {
+    /**
+     * @var \CogPowered\FineDiff\Render\RendererInterface
+     */
+    protected $text;
+    
     public function setUp()
     {
         $this->text = new Text;
@@ -26,7 +31,7 @@ class CallbackTest extends PHPUnit_Framework_TestCase
         $output = $this->text->callback('d', 'elephant', 0, 100);
         $this->assertEquals($output, '');
 
-        $output = $this->text->callback('d', "elephant", 3, 4);
+        $output = $this->text->callback('d', 'elephant', 3, 4);
         $this->assertEquals($output, '');
     }
 

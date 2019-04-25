@@ -2,12 +2,17 @@
 
 namespace FineDiffTests\Granularity;
 
-use PHPUnit_Framework_TestCase;
-use cogpowered\FineDiff\Delimiters;
-use cogpowered\FineDiff\Granularity\Character;
+use FineDiffTests\TestCase;
+use CogPowered\FineDiff\Delimiters;
+use CogPowered\FineDiff\Granularity\Character;
 
-class CharacterTest extends PHPUnit_Framework_TestCase
+class CharacterTest extends TestCase
 {
+    /**
+     * @var \CogPowered\FineDiff\Granularity\Granularity
+     */
+    protected $character;
+    
     protected $delimiters = array(
         Delimiters::PARAGRAPH,
         Delimiters::SENTENCE,
@@ -22,10 +27,10 @@ class CharacterTest extends PHPUnit_Framework_TestCase
 
     public function testExtendsAndImplements()
     {
-        $this->assertTrue(is_a($this->character, 'cogpowered\FineDiff\Granularity\Granularity'));
-        $this->assertTrue(is_a($this->character, 'cogpowered\FineDiff\Granularity\GranularityInterface'));
-        $this->assertTrue(is_a($this->character, 'ArrayAccess'));
-        $this->assertTrue(is_a($this->character, 'Countable'));
+        $this->assertInstanceOf('CogPowered\FineDiff\Granularity\Granularity', $this->character);
+        $this->assertInstanceOf('CogPowered\FineDiff\Granularity\GranularityInterface', $this->character);
+        $this->assertInstanceOf('ArrayAccess', $this->character);
+        $this->assertInstanceOf('Countable', $this->character);
     }
 
     public function testGetDelimiters()
@@ -42,7 +47,7 @@ class CharacterTest extends PHPUnit_Framework_TestCase
 
     public function testCountable()
     {
-        $this->assertEquals(count($this->character), count($this->delimiters));
+        $this->assertCount(count($this->character), $this->delimiters);
     }
 
     public function testArrayAccess()
@@ -70,7 +75,7 @@ class CharacterTest extends PHPUnit_Framework_TestCase
         // Set
         for ($i = 0; $i < count($this->delimiters) + 1; $i++) {
 
-            $rand = rand(0, 1000);
+            $rand = mt_rand(0, 1000);
 
             $this->character[$i] = $rand;
             $this->assertEquals($this->character[$i], $rand);
@@ -80,6 +85,6 @@ class CharacterTest extends PHPUnit_Framework_TestCase
 
         // Unset
         unset($this->character[ count($this->delimiters) ]);
-        $this->assertEquals(count($this->character), count($this->delimiters));
+        $this->assertCount(count($this->character), $this->delimiters);
     }
 }

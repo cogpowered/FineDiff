@@ -16,10 +16,27 @@
  * @license MIT License (http://www.opensource.org/licenses/mit-license.php)
  */
 
-namespace cogpowered\FineDiff\Render;
+namespace CogPowered\FineDiff\Render;
 
 interface RendererInterface
 {
-    public function process($from_text, $opcode);
+    /**
+     * Covert text based on the provided operation codes.
+     *
+     * @param string                                                     $from_text
+     * @param string|\CogPowered\FineDiff\Parser\OperationCodesInterface $operation_codes
+     *
+     * @return string
+     */
+    public function process($from_text, $operation_codes);
+
+    /**
+     * @param string $opcode
+     * @param string $from
+     * @param int    $from_offset
+     * @param int    $from_len
+     *
+     * @return string
+     */
     public function callback($opcode, $from, $from_offset, $from_len);
 }

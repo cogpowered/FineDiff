@@ -16,12 +16,12 @@
  * @license MIT License (http://www.opensource.org/licenses/mit-license.php)
  */
 
-namespace cogpowered\FineDiff\Granularity;
+namespace CogPowered\FineDiff\Granularity;
 
 /**
  * Granularities should extend this class.
  */
-abstract class Granularity implements GranularityInterface, \ArrayAccess, \Countable
+abstract class Granularity implements GranularityInterface
 {
     /**
      * @var array Extending granularities should override this.
@@ -49,7 +49,7 @@ abstract class Granularity implements GranularityInterface, \ArrayAccess, \Count
      */
     public function offsetSet($offset, $value)
     {
-        if (is_null($offset)) {
+        if ($offset === null) {
             $this->delimiters[] = $value;
         } else {
             $this->delimiters[$offset] = $value;

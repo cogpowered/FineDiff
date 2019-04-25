@@ -2,11 +2,11 @@
 
 namespace FineDiffTests\Diff;
 
-use PHPUnit_Framework_TestCase;
+use FineDiffTests\TestCase;
 use Mockery as m;
-use cogpowered\FineDiff\Diff;
+use CogPowered\FineDiff\Diff;
 
-class DependencyInjectTest extends PHPUnit_Framework_TestCase
+class DependencyInjectTest extends TestCase
 {
     public function tearDown()
     {
@@ -15,59 +15,60 @@ class DependencyInjectTest extends PHPUnit_Framework_TestCase
 
     public function testGetGranularity()
     {
-        $character = m::mock('cogpowered\FineDiff\Granularity\Character');
-        $character->shouldReceive('justTesting')->once();
+        $character = m::mock('CogPowered\FineDiff\Granularity\Character');
 
         $diff = new Diff($character);
         $granularity = $diff->getGranularity();
 
-        $granularity->justTesting();
+        $this->assertInstanceOf('CogPowered\FineDiff\Granularity\Character', $granularity);
     }
 
     public function testGetRenderer()
     {
-        $html = m::mock('cogpowered\FineDiff\Render\Html');
-        $html->shouldReceive('justTesting')->once();
+        $html = m::mock('CogPowered\FineDiff\Render\Html');
 
         $diff = new Diff(null, $html);
         $renderer = $diff->getRenderer();
 
-        $renderer->justTesting();
+        $this->assertInstanceOf('CogPowered\FineDiff\Render\Html', $renderer);
     }
 
     public function testRender()
     {
-        $opcodes = m::mock('cogpowered\FineDiff\Parser\Opcodes');
-        $opcodes->shouldReceive('generate')->andReturn('c12');
+        $operation_codes = m::mock('CogPowered\FineDiff\Parser\OperationCodes');
+        $operation_codes->shouldReceive('generate')->andReturn('c12');
 
-        $parser = m::mock('cogpowered\FineDiff\Parser\Parser');
-        $parser->shouldReceive('parse')->andReturn($opcodes);
+        $parser = m::mock('CogPowered\FineDiff\Parser\Parser');
+        $parser->shouldReceive('parse')->andReturn($operation_codes);
 
-        $html = m::mock('cogpowered\FineDiff\Render\Html');
-        $html->shouldReceive('process')->with('hello', $opcodes)->once();
+        $html = m::mock('CogPowered\FineDiff\Render\Html');
+        $html->shouldReceive('process')->with('hello', $operation_codes)->once();
 
 
         $diff = new Diff(null, $html, $parser);
         $diff->render('hello', 'hello2');
+        
+        $this->assertTrue(true);
     }
 
     public function testGetParser()
     {
-        $parser = m::mock('cogpowered\FineDiff\Parser\Parser');
-        $parser->shouldReceive('justTesting')->once();
+        $parser = m::mock('CogPowered\FineDiff\Parser\Parser');
 
         $diff = new Diff(null, null, $parser);
         $parser = $diff->getParser();
 
-        $parser->justTesting();
+        $this->assertInstanceOf('CogPowered\FineDiff\Parser\Parser', $parser);
     }
 
-    public function testGetOpcodes()
+    public function testGetOperationCodes()
     {
-        $parser = m::mock('cogpowered\FineDiff\Parser\Parser');
+        $parser = m::mock('CogPowered\FineDiff\Parser\Parser');
         $parser->shouldReceive('parse')->with('foobar', 'eggfooba')->once();
 
         $diff = new Diff(null, null, $parser);
-        $diff->getOpcodes('foobar', 'eggfooba');
+        $diff->getOperationCodes('foobar', 'eggfooba');
+
+        $this->assertTrue(true);
     }
 }

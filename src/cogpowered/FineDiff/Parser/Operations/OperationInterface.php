@@ -16,10 +16,31 @@
  * @license MIT License (http://www.opensource.org/licenses/mit-license.php)
  */
 
-namespace cogpowered\FineDiff\Parser\Operations;
+namespace CogPowered\FineDiff\Parser\Operations;
 
 interface OperationInterface
 {
+    /**
+     * Copy code
+     *
+     * @var string
+     */
+    const COPY = 'c';
+
+    /**
+     * Delete code
+     *
+     * @var string
+     */
+    const DELETE = 'd';
+
+    /**
+     * Insert code
+     *
+     * @var string
+     */
+    const INSERT = 'i';
+
     /**
      * @return int
      */
@@ -31,7 +52,7 @@ interface OperationInterface
     public function getToLen();
 
     /**
-     * @return string Opcode for this operation.
+     * @return string Operation code for this operation.
      */
-    public function getOpcode();
+    public function getOperationCode();
 }

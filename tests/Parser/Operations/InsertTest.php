@@ -2,15 +2,15 @@
 
 namespace FineDiffTests\Parser\Operations;
 
-use PHPUnit_Framework_TestCase;
-use cogpowered\FineDiff\Parser\Operations\Insert;
+use FineDiffTests\TestCase;
+use CogPowered\FineDiff\Parser\Operations\Insert;
 
-class InsertTest extends PHPUnit_Framework_TestCase
+class InsertTest extends TestCase
 {
     public function testImplementsOperationInterface()
     {
         $replace = new Insert('hello world');
-        $this->assertTrue(is_a($replace, 'cogpowered\FineDiff\Parser\Operations\OperationInterface'));
+        $this->assertInstanceOf('CogPowered\FineDiff\Parser\Operations\OperationInterface', $replace);
     }
 
     public function testGetFromLen()
@@ -31,12 +31,12 @@ class InsertTest extends PHPUnit_Framework_TestCase
         $this->assertEquals($insert->getText(), 'foobar');
     }
 
-    public function testGetOpcode()
+    public function testGetOperationCode()
     {
         $insert = new Insert('C');
-        $this->assertEquals($insert->getOpcode(), 'i:C');
+        $this->assertEquals($insert->getOperationCode(), 'i:C');
 
         $insert = new Insert('blue');
-        $this->assertEquals($insert->getOpcode(), 'i4:blue');
+        $this->assertEquals($insert->getOperationCode(), 'i4:blue');
     }
 }

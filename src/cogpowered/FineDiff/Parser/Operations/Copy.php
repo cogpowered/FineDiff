@@ -16,12 +16,12 @@
  * @license MIT License (http://www.opensource.org/licenses/mit-license.php)
  */
 
-namespace cogpowered\FineDiff\Parser\Operations;
+namespace CogPowered\FineDiff\Parser\Operations;
 
 /**
  * Generates the opcode for a copy operation.
  */
-class Copy implements OperationInterface
+class Copy extends Operation
 {
     /**
      * Set the initial length.
@@ -52,13 +52,13 @@ class Copy implements OperationInterface
     /**
      * @inheritdoc
      */
-    public function getOpcode()
+    public function getOperationCode()
     {
         if ($this->len === 1) {
-            return 'c';
+            return static::COPY;
         }
 
-        return "c{$this->len}";
+        return static::COPY.$this->len;
     }
 
     /**

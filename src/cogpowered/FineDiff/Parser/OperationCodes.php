@@ -16,43 +16,44 @@
  * @license MIT License (http://www.opensource.org/licenses/mit-license.php)
  */
 
-namespace cogpowered\FineDiff\Parser;
+namespace CogPowered\FineDiff\Parser;
 
-use cogpowered\FineDiff\Exceptions\OperationException;
+use CogPowered\FineDiff\Exceptions\OperationException;
 
 /**
- * Holds all the opcodes returned by the parser.
+ * Holds all the operation codes returned by the parser.
  */
-class Opcodes implements OpcodesInterface
+class OperationCodes implements OperationCodesInterface
 {
     /**
-     * @var array Individual opcodes.
+     * @var string[] Individual operation codes.
      */
-    protected $opcodes = array();
+    protected $operation_codes = array();
 
     /**
      * @inheritdoc
      */
-    public function getOpcodes()
+    public function getOperationCodes()
     {
-        return $this->opcodes;
+        return $this->operation_codes;
     }
 
     /**
      * @inheritdoc
      */
-    public function setOpcodes(array $opcodes)
+    public function setOperationCodes(array $operation_codes)
     {
-        $this->opcodes = array();
+        $this->operation_codes = array();
 
         // Ensure that all elements of the array
         // are of the correct type
-        foreach ($opcodes as $opcode) {
-            if (!is_a($opcode, 'cogpowered\FineDiff\Parser\Operations\OperationInterface')) {
-                throw new OperationException('Invalid opcode object');
+        /** @var \CogPowered\FineDiff\Parser\Operations\OperationInterface $operation_code */
+        foreach ($operation_codes as $operation_code) {
+            if (!is_a($operation_code, 'CogPowered\FineDiff\Parser\Operations\OperationInterface')) {
+                throw new OperationException('Invalid operation code object');
             }
 
-            $this->opcodes[] = $opcode->getOpcode();
+            $this->operation_codes[] = $operation_code->getOperationCode();
         }
     }
 
@@ -61,7 +62,7 @@ class Opcodes implements OpcodesInterface
      */
     public function generate()
     {
-        return implode('', $this->opcodes);
+        return implode('', $this->operation_codes);
     }
 
     /**

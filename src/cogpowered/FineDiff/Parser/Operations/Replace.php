@@ -16,18 +16,18 @@
  * @license MIT License (http://www.opensource.org/licenses/mit-license.php)
  */
 
-namespace cogpowered\FineDiff\Parser\Operations;
+namespace CogPowered\FineDiff\Parser\Operations;
 
-class Replace implements OperationInterface
+class Replace extends Operation
 {
     /**
-     * @param int $fromLen
+     * @param int    $fromLen
      * @param string $text
      */
     public function __construct($fromLen, $text)
     {
-        $this->fromLen = $fromLen;
-        $this->text    = $text;
+        $this->len = $fromLen;
+        $this->text = $text;
     }
 
     /**
@@ -35,7 +35,7 @@ class Replace implements OperationInterface
      */
     public function getFromLen()
     {
-        return $this->fromLen;
+        return $this->len;
     }
 
     /**
@@ -59,20 +59,20 @@ class Replace implements OperationInterface
     /**
      * @inheritdoc
      */
-    public function getOpcode()
+    public function getOperationCode()
     {
-        if ($this->fromLen === 1) {
-            $del_opcode = 'd';
+        if ($this->len === 1) {
+            $del_opcode = static::DELETE;
         } else {
-            $del_opcode = "d{$this->fromLen}";
+            $del_opcode = static::DELETE.$this->len;
         }
 
         $to_len = strlen($this->text);
 
         if ($to_len === 1) {
-            return "{$del_opcode}i:{$this->text}";
+            return $del_opcode.static::INSERT.':'.$this->text;
         }
 
-        return "{$del_opcode}i{$to_len}:{$this->text}";
+        return $del_opcode.static::INSERT.$to_len.':'.$this->text;
     }
 }

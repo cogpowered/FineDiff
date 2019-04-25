@@ -16,7 +16,7 @@
 * @license MIT License (http://www.opensource.org/licenses/mit-license.php)
 */
 
-namespace cogpowered\FineDiff\Exceptions;
+namespace CogPowered\FineDiff\Exceptions;
 
 /**
  * A granularity must have at least one thing to match against. Thrown when this isn't the case.

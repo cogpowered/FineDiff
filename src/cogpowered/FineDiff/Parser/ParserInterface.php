@@ -16,68 +16,71 @@
  * @license MIT License (http://www.opensource.org/licenses/mit-license.php)
  */
 
-namespace cogpowered\FineDiff\Parser;
+namespace CogPowered\FineDiff\Parser;
 
-use cogpowered\FineDiff\Granularity\GranularityInterface;
+use CogPowered\FineDiff\Granularity\GranularityInterface;
 
 interface ParserInterface
 {
     /**
      * Creates an instance.
      *
-     * @param cogpowered\FineDiff\Granularity\GranularityInterface
+     * @param \CogPowered\FineDiff\Granularity\GranularityInterface
      */
     public function __construct(GranularityInterface $granularity);
 
     /**
      * Granularity the parser is working with.
      *
-     * Default is cogpowered\FineDiff\Granularity\Character.
+     * Default is CogPowered\FineDiff\Granularity\Character.
      *
-     * @see cogpowered\FineDiff\Granularity\Character
-     * @see cogpowered\FineDiff\Granularity\Word
-     * @see cogpowered\FineDiff\Granularity\Sentence
-     * @see cogpowered\FineDiff\Granularity\Paragraph
+     * @see \CogPowered\FineDiff\Granularity\Character
+     * @see \CogPowered\FineDiff\Granularity\Word
+     * @see \CogPowered\FineDiff\Granularity\Sentence
+     * @see \CogPowered\FineDiff\Granularity\Paragraph
      *
-     * @return cogpowered\FineDiff\Granularity\GranularityInterface
+     * @return \CogPowered\FineDiff\Granularity\GranularityInterface
      */
     public function getGranularity();
 
     /**
      * Set the granularity that the parser is working with.
      *
-     * @see cogpowered\FineDiff\Granularity\Character
-     * @see cogpowered\FineDiff\Granularity\Word
-     * @see cogpowered\FineDiff\Granularity\Sentence
-     * @see cogpowered\FineDiff\Granularity\Paragraph
+     * @see \CogPowered\FineDiff\Granularity\Character
+     * @see \CogPowered\FineDiff\Granularity\Word
+     * @see \CogPowered\FineDiff\Granularity\Sentence
+     * @see \CogPowered\FineDiff\Granularity\Paragraph
      *
-     * @param cogpowered\FineDiff\Granularity\GranularityInterface
+     * @param \CogPowered\FineDiff\Granularity\GranularityInterface
+     *
      * @return void
      */
     public function setGranularity(GranularityInterface $granularity);
 
     /**
-     * Get the opcodes object that is used to store all the opcodes.
+     * Get the operation codes object that is used to store all the operation codes.
      *
-     * @return cogpowered\FineDiff\Parser\OpcodesInterface
+     * @return \CogPowered\FineDiff\Parser\OperationCodesInterface
      */
-    public function getOpcodes();
+    public function getOperationCodes();
 
     /**
-     * Set the opcodes object used to store all the opcodes for this parse.
+     * Set the operation codes object used to store all the operation codes for this parse.
      *
-     * @param cogpowered\FineDiff\Parser\OpcodesInterface $opcodes.
+     * @param \CogPowered\FineDiff\Parser\OperationCodesInterface $operation_codes .
+     *
      * @return void
      */
-    public function setOpcodes(OpcodesInterface $opcodes);
+    public function setOperationCodes(OperationCodesInterface $operation_codes);
 
     /**
-     * Generates the opcodes needed to transform one string to another.
+     * Generates the operation codes needed to transform one string to another.
      *
      * @param string $from_text
      * @param string $to_text
-     * @throws cogpowered\FineDiff\Exceptions\GranularityCountException
-     * @return cogpowered\FineDiff\Parser\OpcodesInterface
+     *
+     * @return \CogPowered\FineDiff\Parser\OperationCodesInterface
+     * @throws \CogPowered\FineDiff\Exceptions\GranularityCountException
      */
     public function parse($from_text, $to_text);
 }

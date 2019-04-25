@@ -2,15 +2,15 @@
 
 namespace FineDiffTests\Parser\Operations;
 
-use PHPUnit_Framework_TestCase;
-use cogpowered\FineDiff\Parser\Operations\Delete;
+use FineDiffTests\TestCase;
+use CogPowered\FineDiff\Parser\Operations\Delete;
 
-class DeleteTest extends PHPUnit_Framework_TestCase
+class DeleteTest extends TestCase
 {
     public function testImplementsOperationInterface()
     {
         $replace = new Delete(10);
-        $this->assertTrue(is_a($replace, 'cogpowered\FineDiff\Parser\Operations\OperationInterface'));
+        $this->assertInstanceOf('CogPowered\FineDiff\Parser\Operations\OperationInterface', $replace);
     }
 
     public function testGetFromLen()
@@ -25,12 +25,12 @@ class DeleteTest extends PHPUnit_Framework_TestCase
         $this->assertEquals($delete->getToLen(), 0);
     }
 
-    public function testGetOpcode()
+    public function testGetOperationCode()
     {
         $delete = new Delete(1);
-        $this->assertEquals($delete->getOpcode(), 'd');
+        $this->assertEquals($delete->getOperationCode(), 'd');
 
         $delete = new Delete(24);
-        $this->assertEquals($delete->getOpcode(), 'd24');
+        $this->assertEquals($delete->getOperationCode(), 'd24');
     }
 }

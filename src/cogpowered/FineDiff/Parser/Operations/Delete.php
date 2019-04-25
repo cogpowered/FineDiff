@@ -16,12 +16,12 @@
  * @license MIT License (http://www.opensource.org/licenses/mit-license.php)
  */
 
-namespace cogpowered\FineDiff\Parser\Operations;
+namespace CogPowered\FineDiff\Parser\Operations;
 
 /**
  * Generates the opcode for a delete operation.
  */
-class Delete implements OperationInterface
+class Delete extends Operation
 {
     /**
      * Set the initial length.
@@ -30,7 +30,7 @@ class Delete implements OperationInterface
      */
     public function __construct($len)
     {
-        $this->fromLen = $len;
+        $this->len = $len;
     }
 
     /**
@@ -38,7 +38,7 @@ class Delete implements OperationInterface
      */
     public function getFromLen()
     {
-        return $this->fromLen;
+        return $this->len;
     }
 
     /**
@@ -52,12 +52,12 @@ class Delete implements OperationInterface
     /**
      * @inheritdoc
      */
-    public function getOpcode()
+    public function getOperationCode()
     {
-        if ($this->fromLen === 1) {
-            return 'd';
+        if ($this->len === 1) {
+            return Operation::DELETE;
         }
 
-        return "d{$this->fromLen}";
+        return static::DELETE.$this->len;
     }
 }

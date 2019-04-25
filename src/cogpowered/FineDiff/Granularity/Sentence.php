@@ -16,9 +16,9 @@
  * @license MIT License (http://www.opensource.org/licenses/mit-license.php)
  */
 
-namespace cogpowered\FineDiff\Granularity;
+namespace CogPowered\FineDiff\Granularity;
 
-use cogpowered\FineDiff\Delimiters;
+use CogPowered\FineDiff\Delimiters;
 
 /**
  * Sentence level granularity.
