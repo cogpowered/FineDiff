@@ -16,14 +16,14 @@
  * @license MIT License (http://www.opensource.org/licenses/mit-license.php)
  */
 
-namespace cogpowered\FineDiff\Parser;
+namespace CogPowered\FineDiff\Parser;
 
-use cogpowered\FineDiff\Granularity\GranularityInterface;
-use cogpowered\FineDiff\Exceptions\GranularityCountException;
-use cogpowered\FineDiff\Parser\Operations\Copy;
-use cogpowered\FineDiff\Parser\Operations\Delete;
-use cogpowered\FineDiff\Parser\Operations\Insert;
-use cogpowered\FineDiff\Parser\Operations\Replace;
+use CogPowered\FineDiff\Exceptions\GranularityCountException;
+use CogPowered\FineDiff\Granularity\GranularityInterface;
+use CogPowered\FineDiff\Parser\Operations\Copy;
+use CogPowered\FineDiff\Parser\Operations\Delete;
+use CogPowered\FineDiff\Parser\Operations\Insert;
+use CogPowered\FineDiff\Parser\Operations\Replace;
 
 /**
  * Generates a set of instructions to convert one string to another.
@@ -31,14 +31,14 @@ use cogpowered\FineDiff\Parser\Operations\Replace;
 class Parser implements ParserInterface
 {
     /**
-     * @var cogpowered\FineDiff\GranularityInterface
+     * @var \CogPowered\FineDiff\Granularity\GranularityInterface
      */
     protected $granularity;
 
     /**
-     * @var cogpowered\FineDiff\Parser\OpcodesInterface
+     * @var \CogPowered\FineDiff\Parser\OperationCodesInterface
      */
-    protected $opcodes;
+    protected $operation_codes;
 
     /**
      * @var string Text we are comparing against.
@@ -51,17 +51,17 @@ class Parser implements ParserInterface
     protected $from_offset = 0;
 
     /**
-     * @var cogpowered\FineDiff\Operations\OperationInterface
+     * @var \CogPowered\FineDiff\Parser\Operations\OperationInterface
      */
     protected $last_edit;
 
     /**
      * @var int Current position in the granularity array.
      */
-    protected $stackpointer = 0;
+    protected $stack_pointer = 0;
 
     /**
-     * @var array Holds the individual opcodes as the diff takes place.
+     * @var array Holds the individual operation codes as the diff takes place.
      */
     protected $edits = array();
 
@@ -72,8 +72,8 @@ class Parser implements ParserInterface
     {
         $this->granularity = $granularity;
 
-        // Set default opcodes generator
-        $this->opcodes = new Opcodes;
+        // Set default operation codes generator
+        $this->operation_codes = new OperationCodes;
     }
 
     /**
@@ -95,17 +95,17 @@ class Parser implements ParserInterface
     /**
      * @inheritdoc
      */
-    public function getOpcodes()
+    public function getOperationCodes()
     {
-        return $this->opcodes;
+        return $this->operation_codes;
     }
 
     /**
      * @inheritdoc
      */
-    public function setOpcodes(OpcodesInterface $opcodes)
+    public function setOperationCodes(OperationCodesInterface $operation_codes)
     {
-        $this->opcodes = $opcodes;
+        $this->operation_codes = $operation_codes;
     }
 
     /**
@@ -122,15 +122,15 @@ class Parser implements ParserInterface
         $this->from_text    = $from_text;
         $this->from_offset  = 0;
         $this->last_edit    = null;
-        $this->stackpointer = 0;
+        $this->stack_pointer = 0;
         $this->edits        = array();
 
         // Parse the two string
         $this->process($from_text, $to_text);
 
         // Return processed diff
-        $this->opcodes->setOpcodes($this->edits);
-        return $this->opcodes;
+        $this->operation_codes->setOperationCodes($this->edits);
+        return $this->operation_codes;
     }
 
     /**
@@ -138,17 +138,18 @@ class Parser implements ParserInterface
      *
      * @param string $from_text
      * @param string $to_text
+     *
      * @return void
      */
     protected function process($from_text, $to_text)
     {
         // Lets get parsing
-        $delimiters     = $this->granularity[$this->stackpointer++];
-        $has_next_stage = $this->stackpointer < count($this->granularity);
+        $delimiters     = $this->granularity[$this->stack_pointer++];
+        $has_next_stage = $this->stack_pointer < count($this->granularity);
 
         // Actually perform diff
         $diff = $this->diff($from_text, $to_text, $delimiters);
-        $diff = (is_array($diff)) ? $diff : array();
+        $diff = is_array($diff) ? $diff : array();
 
         foreach ($diff as $fragment) {
 
@@ -173,7 +174,7 @@ class Parser implements ParserInterface
             }
         }
 
-        $this->stackpointer--;
+        $this->stack_pointer--;
     }
 
     /**
@@ -182,7 +183,8 @@ class Parser implements ParserInterface
      * @param string $from_text
      * @param string $to_text
      * @param string $delimiters Delimiter to use for this parse.
-     * @return array
+     *
+     * @return \CogPowered\FineDiff\Parser\Operations\OperationInterface[]
      */
     protected function diff($from_text, $to_text, $delimiters)
     {
@@ -279,7 +281,7 @@ class Parser implements ParserInterface
                     $fragment_index_offset = $from_base_fragment_length;
 
                     // iterate until no more match
-                    for (;;) {
+                    while (true) {
 
                         $fragment_from_index = $from_base_fragment_index + $fragment_index_offset;
 
@@ -341,7 +343,8 @@ class Parser implements ParserInterface
      *
      * @param string $from_text
      * @param string $to_text
-     * @return array
+     *
+     * @return \CogPowered\FineDiff\Parser\Operations\OperationInterface[]
      */
     protected function charDiff($from_text, $to_text)
     {
@@ -433,21 +436,23 @@ class Parser implements ParserInterface
     }
 
     /**
-    * Efficiently fragment the text into an array according to specified delimiters.
-    *
-    * No delimiters means fragment into single character. The array indices are the offset of the fragments into
-    * the input string. A sentinel empty fragment is always added at the end.
-    * Careful: No check is performed as to the validity of the delimiters.
-    *
-    * @param string $text
-    * @param string $delimiters
-    * @param array
-    */
+     * Efficiently fragment the text into an array according to specified delimiters.
+     *
+     * No delimiters means fragment into single character. The array indices are the offset of the fragments into
+     * the input string. A sentinel empty fragment is always added at the end.
+     * Careful: No check is performed as to the validity of the delimiters.
+     *
+     * @param string $text
+     * @param string $delimiters
+     * @param array
+     *
+     * @return string[]
+     */
     protected function extractFragments($text, $delimiters)
     {
         // special case: split into characters
         if (empty($delimiters)) {
-            $chars                = str_split($text, 1);
+            $chars                = str_split($text);
             $chars[strlen($text)] = '';
 
             return $chars;
@@ -457,8 +462,7 @@ class Parser implements ParserInterface
         $start     = 0;
         $end       = 0;
 
-        for (;;) {
-
+        while (true) {
             $end += strcspn($text, $delimiters, $end);
             $end += strspn($text, $delimiters, $end);
 

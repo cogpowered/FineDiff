@@ -16,37 +16,38 @@
  * @license MIT License (http://www.opensource.org/licenses/mit-license.php)
  */
 
-namespace cogpowered\FineDiff\Parser;
+namespace CogPowered\FineDiff\Parser;
 
-interface OpcodesInterface
+interface OperationCodesInterface
 {
     /**
-     * Get the opcodes.
+     * Get the operation codes.
      *
      * @return array
      */
-    public function getOpcodes();
+    public function getOperationCodes();
 
     /**
-     * Set the opcodes for this parse.
+     * Set the operation codes for this parse.
      *
-     * @param array $opcodes Elements must be an instance of cogpowered\FineDiff\Parser\Operations\OperationInterface.
-     * @throws cogpowered\FineDiff\Exceptions\OperationException
+     * @param \CogPowered\FineDiff\Parser\Operations\OperationInterface[] $operation_codes Elements must be an instance of \CogPowered\FineDiff\Parser\Operations\OperationInterface.
+     *
      * @return void
+     * @throws \CogPowered\FineDiff\Exceptions\OperationException
      */
-    public function setOpcodes(array $opcodes);
+    public function setOperationCodes(array $operation_codes);
 
     /**
-     * Return the opcodes in a format that can then be rendered.
+     * Return the operation codes in a format that can then be rendered.
      *
      * @return string
      */
     public function generate();
 
     /**
-     * When object is cast to a string returns opcodes as string.
+     * When object is cast to a string returns operation codes as string.
      *
-     * @see Opcodes::generate
+     * @see OperationCodes::generate
      * @return string
      */
     public function __toString();

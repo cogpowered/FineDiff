@@ -2,11 +2,16 @@
 
 namespace FineDiffTests\Render\Html;
 
-use PHPUnit_Framework_TestCase;
-use cogpowered\FineDiff\Render\Html;
+use FineDiffTests\TestCase;
+use CogPowered\FineDiff\Render\Html;
 
-class CallbackTest extends PHPUnit_Framework_TestCase
+class CallbackTest extends TestCase
 {
+    /**
+     * @var \CogPowered\FineDiff\Render\RendererInterface
+     */
+    protected $html;
+    
     public function setUp()
     {
         $this->html = new Html;
@@ -35,7 +40,7 @@ class CallbackTest extends PHPUnit_Framework_TestCase
         $output = $this->html->callback('i', 'monkey', 0, 6);
         $this->assertEquals($output, '<ins>monkey</ins>');
 
-        $output = $this->html->callback('i', "mon&key", 0, 100);
+        $output = $this->html->callback('i', 'mon&key', 0, 100);
         $this->assertEquals($output, '<ins>mon&amp;key</ins>');
     }
 }

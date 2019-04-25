@@ -16,30 +16,17 @@
  * @license MIT License (http://www.opensource.org/licenses/mit-license.php)
  */
 
-namespace CogPowered\FineDiff\Granularity;
+namespace CogPowered\FineDiff\Parser\Operations;
 
-use ArrayAccess;
-use Countable;
-
-interface GranularityInterface extends ArrayAccess, Countable
+abstract class Operation implements OperationInterface
 {
-    public function offsetExists($offset);
-    public function offsetGet($offset);
-    public function offsetSet($offset, $value);
-    public function offsetUnset($offset);
+    /**
+     * @var string
+     */
+    protected $text;
 
     /**
-     * Get the delimiters that make up the granularity.
-     *
-     * @return array
+     * @var int
      */
-    public function getDelimiters();
-
-    /**
-     * Set the delimiters that make up the granularity.
-     *
-     * @param array $delimiters
-     * @return void
-     */
-    public function setDelimiters(array $delimiters);
+    protected $len;
 }

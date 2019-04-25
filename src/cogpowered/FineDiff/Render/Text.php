@@ -16,13 +16,18 @@
  * @license MIT License (http://www.opensource.org/licenses/mit-license.php)
  */
 
-namespace cogpowered\FineDiff\Render;
+namespace CogPowered\FineDiff\Render;
+
+use CogPowered\FineDiff\Parser\Operations\Operation;
 
 class Text extends Renderer
 {
+    /**
+     * @inheritdoc
+     */
     public function callback($opcode, $from, $from_offset, $from_len)
     {
-        if ($opcode === 'c' || $opcode === 'i') {
+        if ($opcode === Operation::COPY || $opcode === Operation::INSERT) {
             return substr($from, $from_offset, $from_len);
         }
 

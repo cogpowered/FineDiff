@@ -16,10 +16,10 @@
  * @license MIT License (http://www.opensource.org/licenses/mit-license.php)
  */
 
-namespace cogpowered\FineDiff;
+namespace CogPowered\FineDiff;
 
 /**
- * Used by classes implementing cogpowered\FineDiff\Granularity\GranularityInterface.
+ * Used by classes implementing \CogPowered\FineDiff\Granularity\GranularityInterface.
  *
  * Class is used more like an Enum type; the class can not be instantiated.
  */
@@ -28,7 +28,7 @@ abstract class Delimiters
     const PARAGRAPH = "\n\r";
     const SENTENCE  = ".\n\r";
     const WORD      = " \t.\n\r";
-    const CHARACTER = "";
+    const CHARACTER = '';
 
     /**
      * Do not allow this class to be instantiated.

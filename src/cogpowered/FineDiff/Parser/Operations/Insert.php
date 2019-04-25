@@ -16,12 +16,12 @@
  * @license MIT License (http://www.opensource.org/licenses/mit-license.php)
  */
 
-namespace cogpowered\FineDiff\Parser\Operations;
+namespace CogPowered\FineDiff\Parser\Operations;
 
 /**
  * Generates the opcode for a copy operation.
  */
-class Insert implements OperationInterface
+class Insert extends Operation
 {
     /**
      * Sets the text that the operation is working with.
@@ -60,14 +60,14 @@ class Insert implements OperationInterface
     /**
      * @inheritdoc
      */
-    public function getOpcode()
+    public function getOperationCode()
     {
         $to_len = strlen($this->text);
 
-        if ( $to_len === 1 ) {
-            return "i:{$this->text}";
+        if ($to_len === 1) {
+            return static::INSERT.':'.$this->text;
         }
 
-        return "i{$to_len}:{$this->text}";
+        return static::INSERT.$to_len.':'.$this->text;
     }
 }

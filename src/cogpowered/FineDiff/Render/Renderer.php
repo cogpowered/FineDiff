@@ -16,61 +16,58 @@
  * @license MIT License (http://www.opensource.org/licenses/mit-license.php)
  */
 
-namespace cogpowered\FineDiff\Render;
+namespace CogPowered\FineDiff\Render;
 
-use cogpowered\FineDiff\Parser\OpcodesInterface;
+use CogPowered\FineDiff\Parser\OperationCodesInterface;
+use CogPowered\FineDiff\Parser\Operations\Operation;
 use InvalidArgumentException;
 
 abstract class Renderer implements RendererInterface
 {
     /**
-     * Covert text based on the provided opcodes.
-     *
-     * @param string                                              $from_text
-     * @param string|\cogpowered\FineDiff\Parser\OpcodesInterface $opcodes
-     *
-     * @return string
+     * {@inheritdoc}
      */
-    public function process($from_text, $opcodes)
+    public function process($from_text, $operation_codes)
     {
-        // Validate opcodes
-        if (!is_string($opcodes) && !($opcodes instanceof OpcodesInterface)) {
-            throw new InvalidArgumentException('Invalid opcodes type');
-        } else {
-            $opcodes = ($opcodes instanceof OpcodesInterface) ? $opcodes->generate() : $opcodes;
+        // Validate operation codes
+        if (!is_string($operation_codes) && !($operation_codes instanceof OperationCodesInterface)) {
+            throw new InvalidArgumentException('Invalid operation codes type');
         }
+
+        $operation_codes = ($operation_codes instanceof OperationCodesInterface) ? $operation_codes->generate() : $operation_codes;
+
 
         // Holds the generated string that is returned
         $output = '';
 
-        $opcodes_len    = strlen($opcodes);
+        $operation_codes_len    = strlen($operation_codes);
         $from_offset    = 0;
-        $opcodes_offset = 0;
+        $operation_codes_offset = 0;
 
-        while ($opcodes_offset < $opcodes_len) {
+        while ($operation_codes_offset < $operation_codes_len) {
 
-            $opcode = substr($opcodes, $opcodes_offset, 1);
-            $opcodes_offset++;
-            $n = intval(substr($opcodes, $opcodes_offset));
+            $opcode = $operation_codes[$operation_codes_offset];
+            $operation_codes_offset++;
+            $n = (int)substr($operation_codes, $operation_codes_offset);
 
             if ($n) {
-                $opcodes_offset += strlen(strval($n));
+                $operation_codes_offset += strlen((string)$n);
             } else {
                 $n = 1;
             }
 
-            if ($opcode === 'c') {
-                // copy n characters from source
-                $data = $this->callback('c', $from_text, $from_offset, $n);
-                $from_offset += $n;
-            } else if ($opcode === 'd') {
-                // delete n characters from source
-                $data = $this->callback('d', $from_text, $from_offset, $n);
-                $from_offset += $n;
-            } else /* if ( $opcode === 'i' ) */ {
-                // insert n characters from opcodes
-                $data = $this->callback('i', $opcodes, $opcodes_offset + 1, $n);
-                $opcodes_offset += 1 + $n;
+            switch ($opcode) {
+                case Operation::COPY:
+                case Operation::DELETE:
+                    $data = $this->callback($opcode, $from_text, $from_offset, $n);
+                    $from_offset += $n;
+                    break;
+                case Operation::INSERT:
+                    $data = $this->callback($opcode, $operation_codes, $operation_codes_offset + 1, $n);
+                    $operation_codes_offset += 1 + $n;
+                    break;
+                default:
+                    $data = '';
             }
 
             $output .= $data;

@@ -2,12 +2,17 @@
 
 namespace FineDiffTests\Granularity;
 
-use PHPUnit_Framework_TestCase;
-use cogpowered\FineDiff\Delimiters;
-use cogpowered\FineDiff\Granularity\Word;
+use FineDiffTests\TestCase;
+use CogPowered\FineDiff\Delimiters;
+use CogPowered\FineDiff\Granularity\Word;
 
-class WordTest extends PHPUnit_Framework_TestCase
+class WordTest extends TestCase
 {
+    /**
+     * @var \CogPowered\FineDiff\Granularity\Granularity
+     */
+    protected $character;
+
     protected $delimiters = array(
         Delimiters::PARAGRAPH,
         Delimiters::SENTENCE,
@@ -21,10 +26,10 @@ class WordTest extends PHPUnit_Framework_TestCase
 
     public function testExtendsAndImplements()
     {
-        $this->assertTrue(is_a($this->character, 'cogpowered\FineDiff\Granularity\Granularity'));
-        $this->assertTrue(is_a($this->character, 'cogpowered\FineDiff\Granularity\GranularityInterface'));
-        $this->assertTrue(is_a($this->character, 'ArrayAccess'));
-        $this->assertTrue(is_a($this->character, 'Countable'));
+        $this->assertInstanceOf('CogPowered\FineDiff\Granularity\Granularity', $this->character);
+        $this->assertInstanceOf('CogPowered\FineDiff\Granularity\GranularityInterface', $this->character);
+        $this->assertInstanceOf('ArrayAccess', $this->character);
+        $this->assertInstanceOf('Countable', $this->character);
     }
 
     public function testGetDelimiters()

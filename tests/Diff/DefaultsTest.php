@@ -2,11 +2,16 @@
 
 namespace FineDiffTests\Diff;
 
-use PHPUnit_Framework_TestCase;
-use cogpowered\FineDiff\Diff;
+use CogPowered\FineDiff\Diff;
+use FineDiffTests\TestCase;
 
-class DefaultsTest extends PHPUnit_Framework_TestCase
+class DefaultsTest extends TestCase
 {
+    /**
+     * @var \CogPowered\FineDiff\Diff
+     */
+    protected $diff;
+    
     public function setUp()
     {
         $this->diff = new Diff;
@@ -14,21 +19,21 @@ class DefaultsTest extends PHPUnit_Framework_TestCase
 
     public function testGetGranularity()
     {
-        $this->assertTrue(is_a($this->diff->getGranularity(), 'cogpowered\FineDiff\Granularity\Character'));
-        $this->assertTrue(is_a($this->diff->getGranularity(), 'cogpowered\FineDiff\Granularity\Granularity'));
-        $this->assertTrue(is_a($this->diff->getGranularity(), 'cogpowered\FineDiff\Granularity\GranularityInterface'));
+        $this->assertInstanceOf('CogPowered\FineDiff\Granularity\Character', $this->diff->getGranularity());
+        $this->assertInstanceOf('CogPowered\FineDiff\Granularity\Granularity', $this->diff->getGranularity());
+        $this->assertInstanceOf('CogPowered\FineDiff\Granularity\GranularityInterface', $this->diff->getGranularity());
     }
 
     public function testGetRenderer()
     {
-        $this->assertTrue(is_a($this->diff->getRenderer(), 'cogpowered\FineDiff\Render\Html'));
-        $this->assertTrue(is_a($this->diff->getRenderer(), 'cogpowered\FineDiff\Render\Renderer'));
-        $this->assertTrue(is_a($this->diff->getRenderer(), 'cogpowered\FineDiff\Render\RendererInterface'));
+        $this->assertInstanceOf('CogPowered\FineDiff\Render\Html', $this->diff->getRenderer());
+        $this->assertInstanceOf('CogPowered\FineDiff\Render\Renderer', $this->diff->getRenderer());
+        $this->assertInstanceOf('CogPowered\FineDiff\Render\RendererInterface', $this->diff->getRenderer());
     }
 
     public function testGetParser()
     {
-        $this->assertTrue(is_a($this->diff->getParser(), 'cogpowered\FineDiff\Parser\Parser'));
-        $this->assertTrue(is_a($this->diff->getParser(), 'cogpowered\FineDiff\Parser\ParserInterface'));
+        $this->assertInstanceOf('CogPowered\FineDiff\Parser\Parser', $this->diff->getParser());
+        $this->assertInstanceOf('CogPowered\FineDiff\Parser\ParserInterface', $this->diff->getParser());
     }
 }

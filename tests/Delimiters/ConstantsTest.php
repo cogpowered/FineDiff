@@ -2,10 +2,11 @@
 
 namespace FineDiffTests\Delimiters;
 
-use PHPUnit_Framework_TestCase;
-use cogpowered\FineDiff\Delimiters;
+use CogPowered\FineDiff\Parser\Operations\Operation;
+use CogPowered\FineDiff\Delimiters;
+use FineDiffTests\TestCase;
 
-class ConstantsTest extends PHPUnit_Framework_TestCase
+class ConstantsTest extends TestCase
 {
     public function testParagraphConstant()
     {
@@ -24,6 +25,21 @@ class ConstantsTest extends PHPUnit_Framework_TestCase
 
     public function testCharacterConstant()
     {
-        $this->assertEquals(Delimiters::CHARACTER, "");
+        $this->assertEquals(Delimiters::CHARACTER, '');
+    }
+
+    public function testCopyConstant()
+    {
+        $this->assertEquals(Operation::COPY, 'c');
+    }
+
+    public function testDeleteConstant()
+    {
+        $this->assertEquals(Operation::DELETE, 'd');
+    }
+
+    public function testInsertConstant()
+    {
+        $this->assertEquals(Operation::INSERT, 'i');
     }
 }

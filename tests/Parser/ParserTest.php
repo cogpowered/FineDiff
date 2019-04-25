@@ -2,13 +2,18 @@
 
 namespace FineDiffTests\Parser;
 
-use PHPUnit_Framework_TestCase;
+use FineDiffTests\TestCase;
 use Mockery as m;
-use cogpowered\FineDiff\Granularity\Character;
-use cogpowered\FineDiff\Parser\Parser;
+use CogPowered\FineDiff\Granularity\Character;
+use CogPowered\FineDiff\Parser\Parser;
 
-class ParserTest extends PHPUnit_Framework_TestCase
+class ParserTest extends TestCase
 {
+    /**
+     * @var \CogPowered\FineDiff\Parser\ParserInterface
+     */
+    protected $parser;
+
     public function setUp()
     {
         $granularity  = new Character;
@@ -22,43 +27,45 @@ class ParserTest extends PHPUnit_Framework_TestCase
 
     public function testInstanceOf()
     {
-        $this->assertTrue(is_a($this->parser, 'cogpowered\FineDiff\Parser\ParserInterface'));
+        $this->assertInstanceOf('CogPowered\FineDiff\Parser\ParserInterface', $this->parser);
     }
 
-    public function testDefaultOpcodes()
+    public function testDefaultOperationCodes()
     {
-        $opcodes = $this->parser->getOpcodes();
-        $this->assertTrue(is_a($opcodes, 'cogpowered\FineDiff\Parser\OpcodesInterface'));
+        $operation_codes = $this->parser->getOperationCodes();
+        $this->assertInstanceOf('CogPowered\FineDiff\Parser\OperationCodesInterface', $operation_codes);
     }
 
-    public function testSetOpcodes()
+    public function testSetOperationCodes()
     {
-        $opcodes = m::mock('cogpowered\FineDiff\Parser\Opcodes');
-        $opcodes->shouldReceive('foo')->andReturn('bar');
-        $this->parser->setOpcodes($opcodes);
+        $operation_codes = m::mock('CogPowered\FineDiff\Parser\OperationCodes');
+        $operation_codes->shouldReceive('foo')->andReturn('bar');
+        $this->parser->setOperationCodes($operation_codes);
 
-        $opcodes = $this->parser->getOpcodes();
-        $this->assertEquals($opcodes->foo(), 'bar');
+        $operation_codes = $this->parser->getOperationCodes();
+        $this->assertEquals($operation_codes->foo(), 'bar');
     }
 
     /**
-     * @expectedException cogpowered\FineDiff\Exceptions\GranularityCountException
+     * @expectedException \CogPowered\FineDiff\Exceptions\GranularityCountException
      */
     public function testParseBadGranularity()
     {
-        $granularity = m::mock('cogpowered\FineDiff\Granularity\Character');
+        $granularity = m::mock('CogPowered\FineDiff\Granularity\Character');
         $granularity->shouldReceive('count')->andReturn(0);
         $parser = new Parser($granularity);
 
         $parser->parse('hello world', 'hello2 worl');
     }
 
-    public function testParseSetOpcodes()
+    public function testParseSetOperationCodes()
     {
-        $opcodes = m::mock('cogpowered\FineDiff\Parser\Opcodes');
-        $opcodes->shouldReceive('setOpcodes')->once();
-        $this->parser->setOpcodes($opcodes);
+        $operation_codes = m::mock('CogPowered\FineDiff\Parser\OperationCodes');
+        $operation_codes->shouldReceive('setOperationCodes')->once();
+        $this->parser->setOperationCodes($operation_codes);
 
         $this->parser->parse('Hello worlds', 'Hello2 world');
+        
+        $this->assertTrue(true);
     }
 }

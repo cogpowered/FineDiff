@@ -22,6 +22,12 @@ Add the following to your composer.json file:
 }
 ```
 
+or run:
+
+```bash
+composer require cogpowered/finediff:"0.3.*"
+```
+
 Upgrading
 ---------
 
@@ -38,7 +44,7 @@ Usage
 Render as HTML the difference between two strings:
 
 ```php
-$diff = new cogpowered\FineDiff\Diff;
+$diff = new \CogPowered\FineDiff\Diff;
 echo $diff->render('string one', 'string two');
 ```
 
@@ -48,7 +54,7 @@ This would then output:
 string <ins>tw</ins>o<del>ne</del>
 ```
 
-You could change the granularity to `cogpowered\FineDiff\Granularity\Word` so the output is:
+You could change the granularity to `CogPowered\FineDiff\Granularity\Word` so the output is:
 
 ```html
 string <del>one</del><ins>two</ins>
@@ -57,8 +63,8 @@ string <del>one</del><ins>two</ins>
 You do this by passing it into the Diff constructor:
 
 ```php
-$granularity = new cogpowered\FineDiff\Granularity\Word;
-$diff        = new cogpowered\FineDiff\Diff($granularity);
+$granularity = new \CogPowered\FineDiff\Granularity\Word;
+$diff        = new \CogPowered\FineDiff\Diff($granularity);
 ```
 
 **Grab opcode instructions**
@@ -66,7 +72,7 @@ $diff        = new cogpowered\FineDiff\Diff($granularity);
 Opcode instructions are what tell FineDiff how to change one string into another.
 
 ```php
-$diff = new cogpowered\FineDiff\Diff;
+$diff = new \CogPowered\FineDiff\Diff;
 echo $diff->getOpcodes('string one', 'string two');
 ```
 
@@ -78,7 +84,7 @@ c7d3i3:two
 
 Render text using the opcodes:
 ```php
-$render = new cogpowered\FineDiff\Render\Text;
+$render = new \CogPowered\FineDiff\Render\Text;
 echo $render->process('string one', 'c7d3i3:two');
 ```
 
@@ -89,7 +95,7 @@ string two
 
 Same with HTML:
 ```php
-$render = new cogpowered\FineDiff\Render\Html;
+$render = new \CogPowered\FineDiff\Render\Html;
 echo $render->process('string one', 'c7d3i3:two');
 ```
 

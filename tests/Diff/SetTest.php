@@ -2,12 +2,17 @@
 
 namespace FineDiffTests\Diff;
 
-use PHPUnit_Framework_TestCase;
+use FineDiffTests\TestCase;
 use Mockery as m;
-use cogpowered\FineDiff\Diff;
+use CogPowered\FineDiff\Diff;
 
-class SetTest extends PHPUnit_Framework_TestCase
+class SetTest extends TestCase
 {
+    /**
+     * @var \CogPowered\FineDiff\Diff
+     */
+    protected $diff;
+
     public function setUp()
     {
         $this->diff = new Diff;
@@ -22,7 +27,7 @@ class SetTest extends PHPUnit_Framework_TestCase
     {
         $this->assertFalse( method_exists($this->diff->getParser(), 'fooBar') );
 
-        $parser = m::mock('cogpowered\FineDiff\Parser\Parser');
+        $parser = m::mock('CogPowered\FineDiff\Parser\Parser');
         $parser->shouldReceive('fooBar')->once();
 
         $this->diff->setParser($parser);
@@ -35,7 +40,7 @@ class SetTest extends PHPUnit_Framework_TestCase
     {
         $this->assertFalse( method_exists($this->diff->getRenderer(), 'fooBar') );
 
-        $html = m::mock('cogpowered\FineDiff\Render\Html');
+        $html = m::mock('CogPowered\FineDiff\Render\Html');
         $html->shouldReceive('fooBar')->once();
 
         $this->diff->setRenderer($html);
@@ -48,10 +53,10 @@ class SetTest extends PHPUnit_Framework_TestCase
     {
         $this->assertFalse( method_exists($this->diff->getGranularity(), 'fooBar') );
 
-        $granularity = m::mock('cogpowered\FineDiff\Granularity\Word');
+        $granularity = m::mock('CogPowered\FineDiff\Granularity\Word');
         $granularity->shouldReceive('fooBar')->once();
 
-        $parser = m::mock('cogpowered\FineDiff\Parser\Parser');
+        $parser = m::mock('CogPowered\FineDiff\Parser\Parser');
         $parser->shouldReceive('setGranularity')->with($granularity)->once();
         $parser->shouldReceive('getGranularity')->andReturn($granularity)->once();
 
