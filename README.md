@@ -1,3 +1,5 @@
+** Project archived: Use https://github.com/d4h/php-finediff **
+
 FineDiff
 ========
 
