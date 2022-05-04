@@ -43,18 +43,18 @@ abstract class Renderer implements RendererInterface
         // Holds the generated string that is returned
         $output = '';
 
-        $opcodes_len    = strlen($opcodes);
+        $opcodes_len    = mb_strlen($opcodes);
         $from_offset    = 0;
         $opcodes_offset = 0;
 
         while ($opcodes_offset < $opcodes_len) {
 
-            $opcode = substr($opcodes, $opcodes_offset, 1);
+            $opcode = mb_substr($opcodes, $opcodes_offset, 1);
             $opcodes_offset++;
-            $n = intval(substr($opcodes, $opcodes_offset));
+            $n = intval(mb_substr($opcodes, $opcodes_offset));
 
             if ($n) {
-                $opcodes_offset += strlen(strval($n));
+                $opcodes_offset += mb_strlen(strval($n));
             } else {
                 $n = 1;
             }
