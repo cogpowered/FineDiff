@@ -1,7 +1,7 @@
 {
-    "name": "cogpowered/finediff",
+    "name": "bariew/finediff",
     "description": "PHP implementation of a Fine granularity Diff engine",
-    "homepage": "https://github.com/cogpowered/FineDiff",
+    "homepage": "https://github.com/bariew/FineDiff",
     "license": "MIT",
     "keywords": ["finediff", "diff", "text", "string", "opcode"],
     "authors": [
@@ -10,7 +10,7 @@
         },
         {
             "name": "Rob Crowe",
-            "email": "rob@cogpowered.com"
+            "email": "rob@bariew.com"
         }
     ],
     "type": "library",
@@ -22,6 +22,6 @@
         "phpunit/phpunit": "*"
     },
     "autoload": {
-        "psr-0": { "cogpowered\\FineDiff": "src/" }
+        "psr-0": { "bariew\\FineDiff": "src/" }
     }
 }

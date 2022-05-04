@@ -5,7 +5,7 @@ FineDiff
 
 Originally written by Raymond Hill ([https://github.com/gorhill/PHP-FineDiff](https://github.com/gorhill/PHP-FineDiff)) FineDiff has been tweaked to bring it up to date with the modern world. That means documented, nicely formatted, tested code that can be easily extended.
 
-[![Build Status](https://travis-ci.org/cogpowered/FineDiff.png?branch=master)](https://travis-ci.org/cogpowered/FineDiff)
+[![Build Status](https://travis-ci.org/bariew/FineDiff.png?branch=master)](https://travis-ci.org/bariew/FineDiff)
 
 Installation
 ------------
@@ -19,7 +19,7 @@ Add the following to your composer.json file:
 ```json
 {
     "require": {
-        "cogpowered/finediff": "0.3.*"
+        "bariew/finediff": "0.3.*"
     }
 }
 ```
@@ -40,7 +40,7 @@ Usage
 Render as HTML the difference between two strings:
 
 ```php
-$diff = new cogpowered\FineDiff\Diff;
+$diff = new bariew\FineDiff\Diff;
 echo $diff->render('string one', 'string two');
 ```
 
@@ -50,7 +50,7 @@ This would then output:
 string <ins>tw</ins>o<del>ne</del>
 ```
 
-You could change the granularity to `cogpowered\FineDiff\Granularity\Word` so the output is:
+You could change the granularity to `bariew\FineDiff\Granularity\Word` so the output is:
 
 ```html
 string <del>one</del><ins>two</ins>
@@ -59,8 +59,8 @@ string <del>one</del><ins>two</ins>
 You do this by passing it into the Diff constructor:
 
 ```php
-$granularity = new cogpowered\FineDiff\Granularity\Word;
-$diff        = new cogpowered\FineDiff\Diff($granularity);
+$granularity = new bariew\FineDiff\Granularity\Word;
+$diff        = new bariew\FineDiff\Diff($granularity);
 ```
 
 **Grab opcode instructions**
@@ -68,7 +68,7 @@ $diff        = new cogpowered\FineDiff\Diff($granularity);
 Opcode instructions are what tell FineDiff how to change one string into another.
 
 ```php
-$diff = new cogpowered\FineDiff\Diff;
+$diff = new bariew\FineDiff\Diff;
 echo $diff->getOpcodes('string one', 'string two');
 ```
 
@@ -80,7 +80,7 @@ c7d3i3:two
 
 Render text using the opcodes:
 ```php
-$render = new cogpowered\FineDiff\Render\Text;
+$render = new bariew\FineDiff\Render\Text;
 echo $render->process('string one', 'c7d3i3:two');
 ```
 
@@ -91,7 +91,7 @@ string two
 
 Same with HTML:
 ```php
-$render = new cogpowered\FineDiff\Render\Html;
+$render = new bariew\FineDiff\Render\Html;
 echo $render->process('string one', 'c7d3i3:two');
 ```
 
@@ -99,7 +99,7 @@ License
 -------
 
 Copyright (c) 2011 Raymond Hill (http://raymondhill.net/blog/?p=441)
-Copyright (c) 2013 Rob Crowe (http://cogpowered.com)
+Copyright (c) 2013 Rob Crowe (http://bariew.com)
 
 Licensed under The MIT License
 

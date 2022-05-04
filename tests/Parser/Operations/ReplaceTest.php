@@ -3,14 +3,14 @@
 namespace FineDiffTests\Parser\Operations;
 
 use PHPUnit_Framework_TestCase;
-use cogpowered\FineDiff\Parser\Operations\Replace;
+use bariew\FineDiff\Parser\Operations\Replace;
 
 class ReplaceTest extends PHPUnit_Framework_TestCase
 {
     public function testImplementsOperationInterface()
     {
         $replace = new Replace('hello', 'world');
-        $this->assertTrue(is_a($replace, 'cogpowered\FineDiff\Parser\Operations\OperationInterface'));
+        $this->assertTrue(is_a($replace, 'bariew\FineDiff\Parser\Operations\OperationInterface'));
     }
 
     public function testGetFromLen()
